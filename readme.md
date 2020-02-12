@@ -8,11 +8,25 @@ Open Source Simple Invoice and Offer Tool with Customers and Companies.
    - Autocomplete Product with All Information
  - Offers
    - Create Invoice from Offer
+   - PDF Download and Preview Option
  - Customers
    - Tax Information
  - Companies (Your Companies)
    - Bank Information
    - Invoice Information Section
+
+# Screenshots
+![Homepage](https://i.ibb.co/Mgvy68r/Homepage.png)
+![Homepage](https://i.ibb.co/zQPGGJG/Login.png)
+![Homepage](https://i.ibb.co/WxnyJ1V/Dashboard.png)
+![Homepage](https://i.ibb.co/tZKh3fh/Customer.png)
+![Homepage](https://i.ibb.co/hF49jbZ/Edit-Customer.png)
+![Homepage](https://i.ibb.co/grKhb9m/Edit-Product.png)
+![Homepage](https://i.ibb.co/6Xh561Z/Invoices.png)
+![Homepage](https://i.ibb.co/vxXVrVs/Order-Overview.png)
+![Homepage](https://i.ibb.co/4YJ6HB0/PDF-Preview.png)
+![Homepage](https://i.ibb.co/9bCxN9c/Offer.png)
+![Homepage](https://i.ibb.co/sWH8vvd/Product.png)
 
 # Getting started
 
