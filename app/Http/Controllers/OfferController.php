@@ -75,12 +75,6 @@ class OfferController extends Controller
             return redirect()->back()->with(['type' => 'danger', 'message' => __('offer.please_select_company')]);
         }
 
-        if ($this->membership->isAvaible(__CLASS__) === false) {
-            return redirect()->back()->with([
-                'type' => 'danger',
-                'message' => __('app.not_enough_limit'),
-            ]);
-        }
 
         $customer = Customer::find($request->customer_id);
         $company = Company::find($request->company_id);
@@ -88,7 +82,6 @@ class OfferController extends Controller
         //prepare Offer
         $lastOffer = Offer::latest()->first();
         $offer = new Offer();
-        $offer->user_id = Auth::user()->id;
         $offer->offer_number = ($lastOffer ? $lastOffer->offer_number + 1 : 1);
 
         //prepare Global Settings via Company Information
@@ -258,7 +251,9 @@ class OfferController extends Controller
     {
         
         $offerProduct = new OfferProduct;
-        $offerProduct->count = str_replace(',', '', $request->count);
+        $offerProduct->count = str_replace('.', '', $request->count);
+        $offerProduct->count = str_replace(',', '.', $offerProduct->count);
+
         $offerProduct->price = str_replace('.', '', $request->price);
         $offerProduct->price = str_replace(',', '.', $offerProduct->price);
         $offerProduct->total = floatval($offerProduct->price) * floatval($offerProduct->count);
@@ -279,6 +274,8 @@ class OfferController extends Controller
     {
         $offerProduct = OfferProduct::find($request->id);
         $offerProduct->count = str_replace('.', '', $request->count);
+        $offerProduct->count = str_replace(',', '.', $offerProduct->count);
+        
         $offerProduct->price = str_replace('.', '', $request->price);
         $offerProduct->price = str_replace(',', '.', $offerProduct->price);
         $offerProduct->total = floatval($offerProduct->price) * floatval($offerProduct->count);
