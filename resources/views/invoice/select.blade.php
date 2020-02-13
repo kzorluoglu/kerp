@@ -15,7 +15,6 @@
 
 
 {{ Form::open(['route' => 'invoice.store', 'method' => 'post']) }}
-{{  Form::hidden('user_id', Auth::user()->id) }} 
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">

@@ -79,7 +79,6 @@ class InvoiceController extends Controller
         //prepare Invoice
         $lastInvoice = Invoice::latest()->first();
         $invoice = new Invoice();
-        $invoice->user_id = Auth::user()->id;
         $invoice->invoice_number = ($lastInvoice ? $lastInvoice->invoice_number + 1 : 1);
 
         //prepare Global Settings via Company Information
@@ -209,11 +208,13 @@ class InvoiceController extends Controller
 
     public function saveProduct(Request $request)
     {
-        
         $invoiceProduct = new InvoiceProduct();
-        $invoiceProduct->count = str_replace(',', '', $request->count);
+        $invoiceProduct->count = str_replace('.', '', $request->count);
+        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
+
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
+
         $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
         $invoiceProduct->title = $request->title;
         $invoiceProduct->invoice_id = $request->invoice_id;
@@ -232,8 +233,11 @@ class InvoiceController extends Controller
     {
         $invoiceProduct = InvoiceProduct::find($request->id);
         $invoiceProduct->count = str_replace('.', '', $request->count);
+        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
+        
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
+        
         $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
         $invoiceProduct->title = $request->title;
         $invoiceProduct->type = $request->type;
