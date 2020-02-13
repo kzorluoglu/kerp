@@ -39,15 +39,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        if ($this->membership->isAvaible(__CLASS__) === false) {
-            return redirect()->back()->with([
-                'type' => 'danger',
-                'message' => __('app.not_enough_limit'),
-                ]);
-        }
-
         $product = new Product;
-        $product->user_id = (int)$request->user_id;
         $product->title =  $request->title;
         $product->description =  $request->description;
         $product->stock = (int)$request->stock;
@@ -87,7 +79,6 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         $product = Product::find($request->input('id'));
-        $product->user_id = (int)$request->user_id;
         $product->title =  $request->title;
         $product->description =  $request->description;
         $product->stock = (int)$request->stock;

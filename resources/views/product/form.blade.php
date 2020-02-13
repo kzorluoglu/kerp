@@ -12,7 +12,6 @@
     </div>
 </div> 
 <div class="row">
-    {{  Form::hidden('user_id', Auth::user()->id) }}
     @if($product->id)
       {{  Form::hidden('id', $product->id) }}
     @endif

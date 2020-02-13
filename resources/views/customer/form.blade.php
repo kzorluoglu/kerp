@@ -13,7 +13,6 @@
 
 <div class="row">
 
-    {{  Form::hidden('user_id', Auth::user()->id) }}
     @if($customer->id)
         {{  Form::hidden('id', $customer->id) }}
     @endif
