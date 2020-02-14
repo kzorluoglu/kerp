@@ -64,9 +64,11 @@
                                 @endif
                             </div>
                         </div><br>
+						@if(Route::has('register'))
                         <div style="text-align: center; display:block;">
                             {!! __('auth.has_no_account', ['route' => route('register')]) !!}
                         </div>
+						@endif
                     </form>
                 </div>
             </div>

@@ -60,6 +60,11 @@ Start the local development server
 
     php artisan serve
 
+Disable "Register" for Daily use, after Setup.
+
+    Auth::routes(); // replace this line with under..
+    Auth::routes(['reset' => true, 'verify' => false, 'register' => false]); // Register Disabled
+    
 ## Licence
 
 MIT
