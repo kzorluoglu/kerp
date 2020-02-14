@@ -29,7 +29,7 @@
                   <div class="row">
                      <div class="col-lg-2">
                         <div class="header-logo">
-                           <a href="index.html"><img src="assets/images/kbitsoftware.png" alt="header brand"></a>
+                           <a href="{{ route('start') }}"><img src="assets/images/kbitsoftware.png" alt="header brand"></a>
                         </div>
                      </div>
                      <div class="col-lg-10">
@@ -60,7 +60,9 @@
                            <ul class="banner-ads-btn m-0 list-inline">
                            @guest
                               <li class="list-inline-item"><a href="{{ route('login') }}" class="ads-btn1 btn btn-primary"><span>{{ __('welcome.banner_login') }}</span></a></li>
-                              <li class="list-inline-item"><a href="{{ route('register') }}" class="ads-btn2 btn btn-primary"><span>{{ __('welcome.banner_register') }}</span></a></li>
+                              @if(Route::has('register'))
+                                 <li class="list-inline-item"><a href="{{ route('register') }}" class="ads-btn2 btn btn-primary"><span>{{ __('welcome.banner_register') }}</span></a></li>
+							         @endif
                            @endguest
                            @auth
                            <li class="list-inline-item"><a href="{{ route('home') }}" class="ads-btn1 btn btn-primary"><span>{{ __('welcome.home') }}</span></a></li>
