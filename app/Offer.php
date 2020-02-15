@@ -8,7 +8,7 @@ class Offer extends Model
 {
     protected $fillable = ['firstname', 'lastname', 'company_name', 'street',
      'streetnumber', 'postcode', 'city', 'country', 'total_price', 'tax_rate',
-     'template', 'pdf_base64', 'date'
+     'template', 'pdf_base64', 'date', 'payment_deadline_day'
     ];
 
 

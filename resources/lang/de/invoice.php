@@ -47,4 +47,8 @@ return [
     "paid_information" => "Bezahlte Informationen",
     "remove_paid" => "Bezahlt markierung wurde entfernt",
     "set_paid" => "Rechnungsnummer <b>:invoice_number</b> wurde als <b>Bezahlt</b> markiert",
+    "payment_deadline_day_text" => "Zahlbar innerhalbe von :day Tagen ohne abzug.",
+    "payment_deadline_day_placeholder" => "Zahlungsziel in Tagen",
+    "payment_type_text" => "Zahlungsart: :type",
+    "payment_type_placeholder" => "Zahlungsart"
 ];

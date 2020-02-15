@@ -46,4 +46,8 @@ return [
     "changetoinvoice" => "Make Invoice from Offer",
     "invoice_before_created" => "Offer has before a Invoice.<br>Invoice Number <b>:invoice_number</b>",
     "invoice_created" => "Invoice Created<br>Invoice Number <b>:invoice_number</b>",
+    "payment_deadline_day_text" => "Payable within :day days without deduction.",
+    "payment_deadline_day_placeholder" => "Payment term in days",
+    "payment_type_text" => "Payment: :type",
+    "payment_type_placeholder" => "Payment"
 ];

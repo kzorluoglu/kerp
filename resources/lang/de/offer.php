@@ -46,4 +46,8 @@ return [
     "changetoinvoice" => "Rechnung aus Angebot Erstellen",
     "invoice_before_created" => "Dieses Angebot hat Rechnung. <br>Rechnungsnummer <b>:invoice_number</b>",
     "invoice_created" => "Rechnung wurde erstellt<br>Rechnungsnummer <b>:invoice_number</b>",
+    "payment_deadline_day_text" => "Zahlbar innerhalbe von :day Tagen ohne abzug.",
+    "payment_deadline_day_placeholder" => "Zahlungsziel in Tagen",
+    "payment_type_text" => "Zahlungsart: :type",
+    "payment_type_placeholder" => "Zahlungsart"
 ];
