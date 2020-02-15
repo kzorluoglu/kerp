@@ -308,6 +308,8 @@ class OfferController extends Controller
     {
         $offer = Offer::find($request->id);
         $offer->information = $request->information;
+        $offer->payment_deadline_day = $request->payment_deadline_day;
+        $offer->payment_type = $request->payment_type;
 
         try {
             $status = $offer->save();

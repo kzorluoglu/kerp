@@ -47,4 +47,8 @@ return [
     "paid_information" => "Paid Description",
     "remove_paid" => "Invoice tag 'Paid' removed.",
     "set_paid" => " Invoice <b>:invoice_number</b> as <b>Paid</b> marked.",
+    "payment_deadline_day_text" => "Payable within :day days without deduction.",
+    "payment_deadline_day_placeholder" => "Payment term in days",
+    "payment_type_text" => "Payment: :type",
+    "payment_type_placeholder" => "Payment"
 ];

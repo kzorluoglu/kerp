@@ -170,6 +170,35 @@
                             <div class="position-relative form-group">
                                 <texteditor inputname="information" inputvalue="@if($invoice->information){!! $invoice->information !!}@endif"></texteditor>
                             </div>
+                            <div class="form-row">
+                                @if($invoice->payment_deadline_day)
+                                    <div class="col">
+                                        <div class="form-group">
+                                        {!! __("invoice.payment_deadline_day_text", [ 'day' => $invoice->payment_deadline_day]) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        {{ Form::text('payment_deadline_day', $invoice->payment_deadline_day, [ 'class' => 'form-control', 'placeholder' => __('invoice.payment_deadline_day_placeholder')] )}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                @if($invoice->payment_type)
+                                <div class="col">
+                                    <div class="form-group">
+                                    {!! __("invoice.payment_type_text", [ 'type' => $invoice->payment_type]) !!}
+                                    </div>
+                                </div>
+                            @endif
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        {{ Form::text('payment_type', $invoice->payment_type, [ 'class' => 'form-control', 'placeholder' => __('invoice.payment_type_placeholder')] )}}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="position-relative form-group">
                                 <button type="submit" class="btn btn-primary">{!! __("invoice.update_information") !!}</button>
                             </div>
@@ -224,9 +253,6 @@
         var type = $('#productlist option').filter(function() {
             return this.value == val;
         }).data('type');
-
-        console.log(price);
-        console.log(type);
 
         $('#price'+rowId).val(price);
         $('#count'+rowId).val(1);

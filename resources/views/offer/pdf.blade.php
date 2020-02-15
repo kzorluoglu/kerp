@@ -97,13 +97,27 @@ margin:0;
                <td class="p-1 text-right">{!! number_format($sum_total, 2, ',', '.') !!} {!! $offer->company->currency !!}</td>
              </tr>
            </table>
-<br><br>
+<br><br><br>
        <table class="table table-borderless">
            <tr>
              <td colspan="4">
                 {!! $offer->information !!}
              </td>
           </tr>
+          @if($offer->payment_deadline_day)
+          <tr>
+            <td colspan="4">
+              {!! __("offer.payment_deadline_day_text", [ 'day' => $offer->payment_deadline_day]) !!}
+            </td>
+         </tr>
+         @endif
+            @if($offer->payment_type)
+            <tr>
+              <td colspan="4">
+                {!! __("offer.payment_type_text", [ 'type' => $offer->payment_type]) !!}
+              </td>
+           </tr>
+           @endif
       </table>
     </div>
 

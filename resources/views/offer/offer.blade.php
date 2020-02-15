@@ -170,12 +170,42 @@
                             <div class="position-relative form-group">
                                 <texteditor inputname="information" inputvalue="@if($offer->information){!! $offer->information !!}@endif"></texteditor>
                             </div>
+
+                            <div class="form-row">
+                                @if($offer->payment_deadline_day)
+                                    <div class="col">
+                                        <div class="form-group">
+                                        {!! __("offer.payment_deadline_day_text", [ 'day' => $offer->payment_deadline_day]) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        {{ Form::text('payment_deadline_day', $offer->payment_deadline_day, [ 'class' => 'form-control', 'placeholder' => __('offer.payment_deadline_day_placeholder')] )}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                @if($offer->payment_type)
+                                <div class="col">
+                                    <div class="form-group">
+                                    {!! __("offer.payment_type_text", [ 'type' => $offer->payment_type]) !!}
+                                    </div>
+                                </div>
+                            @endif
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        {{ Form::text('payment_type', $offer->payment_type, [ 'class' => 'form-control', 'placeholder' => __('offer.payment_type_placeholder')] )}}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="position-relative form-group">
                                 <button type="submit" class="btn btn-primary">{!! __("offer.update_information") !!}</button>
                             </div>
                         {!!  Form::close() !!}
                     </div>
                 </div>
+                
                 <!-- DESCRAPTION Row -->
                 <div class="divider"></div>
 

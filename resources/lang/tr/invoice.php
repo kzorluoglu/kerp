@@ -47,4 +47,8 @@ return [
     "paid_information" => "Tahsil Açıklaması",
     "remove_paid" => "Tahsil edildi etiketi kaldırıldı.",
     "set_paid" => " <b>:invoice_number</b> Fatura numaralı <b>Tahsil edildi</b> olarak işaretledi",
+    "payment_deadline_day_text" => "Kesintisiz, :day gün içinde ödenmesini rica ederiz.",
+    "payment_deadline_day_placeholder" => "Gün olarak ödeme süresi",
+    "payment_type_text" => "Ödeme: :type",
+    "payment_type_placeholder" => "Ödeme"
 ];

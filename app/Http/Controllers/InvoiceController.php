@@ -268,6 +268,8 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::find($request->id);
         $invoice->information = $request->information;
+        $invoice->payment_deadline_day = $request->payment_deadline_day;
+        $invoice->payment_type = $request->payment_type;
 
         try {
             $invoice->save();

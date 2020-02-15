@@ -104,6 +104,21 @@ margin:0;
                 {!! $invoice->information !!}
              </td>
           </tr>
+        </tr>
+        @if($invoice->payment_deadline_day)
+        <tr>
+          <td colspan="4">
+            {!! __("invoice.payment_deadline_day_text", [ 'day' => $invoice->payment_deadline_day]) !!}
+          </td>
+       </tr>
+       @endif
+          @if($invoice->payment_type)
+          <tr>
+            <td colspan="4">
+              {!! __("invoice.payment_type_text", [ 'type' => $invoice->payment_type]) !!}
+            </td>
+         </tr>
+         @endif
       </table>
     </div>
 
