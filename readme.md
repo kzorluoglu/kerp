@@ -5,10 +5,11 @@ Open Source Simple Invoice and Offer Tool with Customers and Companies.
  - Invoices
    - Paid <-> Unpaid Option
    - PDF Download and Preview Option
-   - Autocomplete Product with All Information
+   - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
  - Offers
    - Create Invoice from Offer
    - PDF Download and Preview Option
+   - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
  - Customers
    - Tax Information
  - Companies (Your Companies)
