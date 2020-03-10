@@ -63,6 +63,7 @@
                     @else
                     @include('product.type', ['type' => null ])
                     @endif
+                    <small class="form-text text-muted">{{ __('app.required_input') }}</small>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ return [
     'title' => 'Titel',
     'description' => 'Beschreibung',
     'image' => 'Bild',
-    'stock' => 'Lager',
+    'stock' => 'Stückzahl',
     'price' => 'Preis',
     'type' => 'Typ',
     'new_product' => 'Neues Produkt',

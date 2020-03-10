@@ -243,6 +243,8 @@
 
 
     $(document).on('change', "input[id^='title']", function(event) {
+
+
         var val = $(this).val();
         var rowId = $(this).data('rowid');
 
@@ -254,11 +256,12 @@
             return this.value == val;
         }).data('type');
 
-        $('#price'+rowId).val(price);
-        $('#count'+rowId).val(1);
-        $('#type'+rowId).val(type);
-        
-
+        if($('#price'+rowId).val().length == 0)
+        {
+            $('#price'+rowId).val(price);
+            $('#count'+rowId).val(1);
+            $('#type'+rowId).val(type);
+        }
 });
  
 </script>
