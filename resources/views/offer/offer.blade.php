@@ -255,13 +255,12 @@
             return this.value == val;
         }).data('type');
 
-        console.log(price);
-        console.log(type);
-
-        $('#price'+rowId).val(price);
-        $('#count'+rowId).val(1);
-        $('#type'+rowId).val(type);
-        
+        if($('#price'+rowId).val().length == 0)
+        {
+            $('#price'+rowId).val(price);
+            $('#count'+rowId).val(1);
+            $('#type'+rowId).val(type);
+        }
 
 });
  
