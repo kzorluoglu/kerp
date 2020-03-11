@@ -22,6 +22,7 @@ return [
     "customers" => "Kunden",
     "invoices" => "Rechnungen",
     "offers" => "Angebote",
+    "contracts" => "Vertäge",
     "login" => 'Anmelden',
     "register" => 'Registrieren',
     "logout" => 'Ausloggen',

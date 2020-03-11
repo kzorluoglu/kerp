@@ -166,6 +166,12 @@
                                     {{__('app.offers')}}
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('contract') }}" class="{{ Route::is('contract*') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon pe-7s-copy-file"></i>
+                                    {{__('app.contracts')}}
+                                </a>
+                            </li>
                             @endauth
                         </ul>
                     </div>

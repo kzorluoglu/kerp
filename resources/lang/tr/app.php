@@ -22,6 +22,7 @@ return [
     'customers' => 'Müşteriler',
     'invoices' => 'Faturalar',
     'offers' => 'Teklifler',
+    "contracts" => "Sözleşmeler",
     'login' => 'Giriş',
     'register' => 'Kayıt',
     'logout' => 'Çıkış',
