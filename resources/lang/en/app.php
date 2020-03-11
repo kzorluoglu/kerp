@@ -22,6 +22,7 @@ return [
     'customers' => 'Customers',
     'invoices' => 'Invoices',
     'offers' => 'Offers',
+    "contracts" => "Contracts",
     'login' => 'Login',
     'register' => 'Register',
     'logout' => 'Logout',
