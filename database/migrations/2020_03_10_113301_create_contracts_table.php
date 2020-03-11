@@ -22,7 +22,7 @@ class CreateContractsTable extends Migration
             $table->string('period', 255);
             $table->enum('period_typ', ['month', 'year']);
             $table->string('termination', 255);
-            $table->string('termination_type', ['month', 'year']);
+            $table->enum('termination_type', ['month', 'year']);
             $table->string('document', 255)->nullable();
             $table->timestamps();
         });
