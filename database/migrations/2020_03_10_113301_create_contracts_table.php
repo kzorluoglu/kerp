@@ -18,7 +18,7 @@ class CreateContractsTable extends Migration
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('title', 255);
-            $table->datetime('start_date')->nullable();
+            $table->datetime('start_date');
             $table->string('period', 255);
             $table->enum('period_typ', ['month', 'year']);
             $table->string('termination', 255);
