@@ -22,6 +22,7 @@ return [
     'companies' => 'Companies',
     'customers' => 'Customers',
     'invoices' => 'Invoices',
+    "incoming_invoices" => "Incoming Rechnungen",
     'offers' => 'Offers',
     "contracts" => "Contracts",
     "overview" => "Overview",
