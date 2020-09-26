@@ -63,9 +63,9 @@ Route::middleware('auth')->group(function () {
 
    Route::prefix('invoice')->group(function () {
        Route::get('/', 'InvoiceController@index')->name('invoice');
-       Route::get('select', 'InvoiceController@select')->name('invoice.select'); 
+       Route::get('select', 'InvoiceController@select')->name('invoice.select');
        Route::post('store', 'InvoiceController@store')->name('invoice.store');
-       Route::get('prepare/{id}', 'InvoiceController@prepare')->name('invoice.prepare'); 
+       Route::get('prepare/{id}', 'InvoiceController@prepare')->name('invoice.prepare');
        Route::post('update', 'InvoiceController@update')->name('invoice.update');
        Route::get('delete/{id}', 'InvoiceController@delete')->name('invoice.delete');
        Route::get('pdf/{id}', 'InvoiceController@pdf')->name('invoice.pdf');
@@ -80,9 +80,9 @@ Route::middleware('auth')->group(function () {
 
        Route::get('/autocomplete/invoicecompany', 'InvoiceController@autocompleteInvoiceCompany');
        Route::get('/autocomplete/invoicecustomer', 'InvoiceController@autocompleteInvoiceCustomer');
-       Route::get('/autocomplete/invoiceproduct', 'InvoiceController@autocompleteProduct'); 
+       Route::get('/autocomplete/invoiceproduct', 'InvoiceController@autocompleteProduct');
 
-       Route::get('paid/{id}', 'InvoiceController@paid')->name('invoice.paid'); 
+       Route::get('paid/{id}', 'InvoiceController@paid')->name('invoice.paid');
 
 
   });
@@ -90,9 +90,9 @@ Route::middleware('auth')->group(function () {
 
   Route::prefix('offer')->group(function () {
     Route::get('/', 'OfferController@index')->name('offer');
-    Route::get('select', 'OfferController@select')->name('offer.select'); 
+    Route::get('select', 'OfferController@select')->name('offer.select');
     Route::post('store', 'OfferController@store')->name('offer.store');
-    Route::get('prepare/{id}', 'OfferController@prepare')->name('offer.prepare'); 
+    Route::get('prepare/{id}', 'OfferController@prepare')->name('offer.prepare');
     Route::post('update', 'OfferController@update')->name('offer.update');
     Route::get('delete/{id}', 'OfferController@delete')->name('offer.delete');
     Route::get('pdf/{id}', 'OfferController@pdf')->name('offer.pdf');
@@ -105,7 +105,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('updateinformation', 'OfferController@updateInformation')->name('offer.updateinformation');
 
-    Route::get('changetoinvoice/{id}', 'OfferController@changeToInvoice')->name('offer.changetoinvoice'); 
+    Route::get('changetoinvoice/{id}', 'OfferController@changeToInvoice')->name('offer.changetoinvoice');
 
 
     });
@@ -119,5 +119,9 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/{id}', 'CustomerController@delete')->name('contract.delete');
    });
 
+    Route::prefix('overview')->group(function () {
+        Route::get('/', 'OverviewController@index')->name('overview');
+        Route::get('show/{id}', 'CustomerController@show')->name('overview.show');
+    });
 
 });
