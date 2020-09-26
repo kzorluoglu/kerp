@@ -16,8 +16,8 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('offer_number', 255);
-            $table->string('firstname', 255);
-            $table->string('lastname', 255);
+            $table->string('firstname', 255)->nullable();
+            $table->string('lastname', 255)->nullable();
             $table->string('company_name', 255)->nullable();
             $table->string('street', 255);
             $table->string('streetnumber', 255);

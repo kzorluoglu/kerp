@@ -20,10 +20,10 @@ class IncomingInvoiceController extends Controller
         $search = $request->input('search');
 
         $orderRaw = "CAST(invoice_number AS UNSIGNED) DESC";
-        $invoices = Invoice::where('incoming_invoice', 1)->orderByRaw($orderRaw)->paginate(15);
+        $invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->orderByRaw($orderRaw)->paginate(15);
 
         if ($search) {
-            $invoices = Invoice::where('incoming_invoice', 1)->where('invoice_number', 'like', '%'.$search.'%')
+            $invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->where('invoice_number', 'like', '%'.$search.'%')
           ->orWhere('firstname', 'like', '%'.$search.'%')
           ->orWhere('lastname', 'like', '%'.$search.'%')
           ->orWhere('company_name', 'like', '%'.$search.'%')
@@ -77,10 +77,11 @@ class IncomingInvoiceController extends Controller
         $company = Company::find($request->company_id);
 
         //prepare Invoice
-        $lastInvoice = Invoice::latest()->first();
+        $lastInvoice = Invoice::withoutGlobalScopes()->incomingInvoice()->latest()->first();
         $invoice = new Invoice();
+        $invoice->invoice_number = 0;
         $invoice->incoming_invoice = true;
-        $invoice->invoice_number = ($lastInvoice ? $lastInvoice->invoice_number + 1 : 10000);
+        $invoice->intern_invoice_number = ($lastInvoice ? $lastInvoice->intern_invoice_number + 1 : 20000);
 
         //prepare Global Settings via Company Information
         $invoice->company_id = $company->id;
@@ -112,12 +113,12 @@ class IncomingInvoiceController extends Controller
 
     public function prepare($id)
     {
-        $invoice = Invoice::find($id);
+        $invoice = Invoice::withoutGlobalScopes()->find($id);
         $sum_price_total = $invoice->products()->sum('total');
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
         $products = Product::all();
-        return view('incoming_invoiceprepare', [
+        return view('incoming_invoice.prepare', [
         'invoice' => $invoice,
         'sum_price_total' => $sum_price_total,
         'sum_tax' => $sum_tax,
@@ -126,55 +127,9 @@ class IncomingInvoiceController extends Controller
       ]);
     }
 
-    public function pdf($invoice_id, Request $request)
-    {
-        $invoice = Invoice::find($invoice_id);
-
-        $sum_price_total = $invoice->products()->sum('total');
-        $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
-        $sum_total = $sum_price_total + $sum_tax;
-
-        $data = [
-        'invoice' => $invoice,
-        'sum_price_total' => $sum_price_total,
-        'sum_tax' => $sum_tax,
-        'sum_total' => $sum_total,
-      ];
-
-        if ($request->input('debug')) {
-            return view('incoming_invoicepdf', $data);
-        }
-
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->stream();
-    }
-
-    public function download(Request $request)
-    {
-        $invoice = Invoice::find($request->id);
-
-        $sum_price_total = $invoice->products()->sum('total');
-        $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
-        $sum_total = $sum_price_total + $sum_tax;
-
-        $data = [
-            'invoice' => $invoice,
-            'sum_price_total' => $sum_price_total,
-            'sum_tax' => $sum_tax,
-            'sum_total' => $sum_total
-        ];
-
-        $pdfName = $invoice->firstname."-".$invoice->lastname."-".$invoice->invoice_number;
-        if($invoice->company_name){
-            $pdfName = $invoice->company_name."-".$invoice->invoice_number;
-        }
-        $pdfName =  Str::slug($pdfName, '-');
-
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
-    }
-
     public function paid($id)
     {
-        $invoice = Invoice::find($id);
+        $invoice = Invoice::withoutGlobalScopes()->find($id);
         $invoice->paid = !$invoice->paid;
         $invoice->paid_date = null;
 
@@ -185,9 +140,9 @@ class IncomingInvoiceController extends Controller
 
         try {
             $invoice->save();
-            $message = __('incoming_invoiceremove_paid', ['invoice_number' => $invoice->invoice_number]);
+            $message = __('incoming_invoice.remove_paid', ['invoice_number' => $invoice->invoice_number]);
             if($invoice->paid){
-                $message = __('incoming_invoiceset_paid', ['invoice_number' => $invoice->invoice_number]);
+                $message = __('incoming_invoice.set_paid', ['invoice_number' => $invoice->invoice_number]);
             }
             return redirect()->back()->with(['type' => 'success', 'message' => $message]);
         } catch (\Exception $e) {
@@ -199,9 +154,9 @@ class IncomingInvoiceController extends Controller
     {
         try {
             $invoiceProducts = InvoiceProduct::where('invoice_id', $id)->delete();
-            $invoice = Invoice::find($id)->delete();
+            $invoice = Invoice::withoutGlobalScopes()->find($id)->delete();
 
-            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoicedeleted')]);
+            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.deleted')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
@@ -224,7 +179,7 @@ class IncomingInvoiceController extends Controller
         try {
             $status = $invoiceProduct->save();
 
-            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoiceproduct_added')]);
+            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_added')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
@@ -246,7 +201,7 @@ class IncomingInvoiceController extends Controller
         try {
             $status = $invoiceProduct->save();
 
-            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoiceproduct_updated')]);
+            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_updated')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
@@ -259,7 +214,7 @@ class IncomingInvoiceController extends Controller
         try {
             $status = $invoiceProduct->delete();
 
-            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoiceproduct_deleted')]);
+            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_deleted')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
@@ -267,14 +222,14 @@ class IncomingInvoiceController extends Controller
 
     public function updateInformation(Request $request)
     {
-        $invoice = Invoice::find($request->id);
+        $invoice = Invoice::withoutGlobalScopes()->find($request->id);
         $invoice->information = $request->information;
         $invoice->payment_deadline_day = $request->payment_deadline_day;
         $invoice->payment_type = $request->payment_type;
 
         try {
             $invoice->save();
-            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoiceinformation_updated')]);
+            return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.information_updated')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
