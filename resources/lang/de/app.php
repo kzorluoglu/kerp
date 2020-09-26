@@ -22,6 +22,7 @@ return [
     "companies" => "Firmen",
     "customers" => "Kunden",
     "invoices" => "Rechnungen",
+    "incoming_invoices" => "Eingehende Rechnungen",
     "offers" => "Angebote",
     "contracts" => "Vertäge",
     "overview" => "Überblick",

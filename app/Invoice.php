@@ -8,7 +8,7 @@ class Invoice extends Model
 {
     protected $fillable = ['firstname', 'lastname', 'company_name', 'street',
      'streetnumber', 'postcode', 'city', 'country', 'total_price', 'tax_rate',
-     'template', 'pdf_base64', 'date', 'payment_deadline_day'
+     'template', 'pdf_base64', 'date', 'payment_deadline_day', 'incoming_invoice'
     ];
 
     public function products()
