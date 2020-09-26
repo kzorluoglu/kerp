@@ -3,6 +3,7 @@
 return [
 
     "search" => "Suche",
+    "filter" => "Filtern",
     "action" => "Aktionen",
     "next" => "Weiter",
     "edit" => "Bearbeiten",
@@ -23,6 +24,7 @@ return [
     "invoices" => "Rechnungen",
     "offers" => "Angebote",
     "contracts" => "Vertäge",
+    "overview" => "Überblick",
     "login" => 'Anmelden',
     "register" => 'Registrieren',
     "logout" => 'Ausloggen',

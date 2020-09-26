@@ -20,4 +20,23 @@ class Invoice extends Model
     {
       return $this->hasOne('App\Company', 'id', 'company_id');
     }
+
+    public function getSumTotalWithoutTaxAttribute() : float
+    {
+        return round($this->products()->sum('total'), 2);
+    }
+
+    public function getSumTaxAttribute() : float
+    {
+        $sum_price_total = $this->products()->sum('total');
+        return round(($sum_price_total * $this->tax_rate) / 100, 2);
+    }
+
+    public function getSumTotalAttribute() : float
+    {
+        $sum_price_total = $this->products()->sum('total');
+        $sum_tax = round(($sum_price_total * $this->tax_rate) / 100, 2);
+        return $sum_price_total + $sum_tax;
+    }
+
 }
