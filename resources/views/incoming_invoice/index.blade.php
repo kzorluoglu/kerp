@@ -11,13 +11,13 @@
                 {{__('invoice.page_title')}}
                 <div class="page-title-subheading">{{__('invoice.page_description')}}</div>
             </div>
-        </div>     
+        </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md">
-        <a href="{{route('invoice.select')}}" class="mb-2 mr-2 btn btn-primary">{{__('invoice.new_invoice')}}</a>
+        <a href="{{route('invoice.select')}}" class="mb-2 mr-2 btn btn-primary">{{__('incoming_invoice.new_invoice')}}</a>
     </div>
     <div class="col-md">
         {{ Form::open(['route' => 'invoice', 'method' => 'get']) }}
@@ -38,7 +38,8 @@
                 <table class="mb-0 table table-hover">
                     <thead>
                         <tr>
-                            <th width="100" scope="col">{{__('invoice.invoice_number')}}</th>
+                            <th scope="col">{{__('incoming_invoice.intern_number')}}</th>
+                            <th scope="col">{{__('invoice.invoice_number')}}</th>
                             <th scope="col">{{__('invoice.date')}}</th>
                             <th scope="col">{{__('invoice.firstname')}}</th>
                             <th scope="col">{{__('invoice.lastname')}}</th>
@@ -51,7 +52,8 @@
                             @foreach($invoices as $invoice)
 
                             <tr @if($invoice->paid) class="table-success" @endif>
-                                <th scope="row">{{ $invoice->invoice_number }} @if($invoice->paid) <span class="badge badge-success badge-pill">{{ __('invoice.paid')}}</span> @endif</th>
+                                <th scope="row">{{ $invoice->intern_invoice_number }}@if($invoice->paid) <span class="badge badge-success badge-pill">{{ __('invoice.paid')}}</span> @endif</th>
+                                <td>{{ $invoice->invoice_number }}</td>
                                 <td>{{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}</td>
                                 <td>{{ $invoice->firstname }}</td>
                                 <td>{{ $invoice->lastname }}</td>

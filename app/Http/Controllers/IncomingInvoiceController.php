@@ -79,7 +79,8 @@ class IncomingInvoiceController extends Controller
         //prepare Invoice
         $lastInvoice = Invoice::latest()->first();
         $invoice = new Invoice();
-        $invoice->invoice_number = ($lastInvoice ? $lastInvoice->invoice_number + 1 : 1);
+        $invoice->incoming_invoice = true;
+        $invoice->invoice_number = ($lastInvoice ? $lastInvoice->invoice_number + 1 : 10000);
 
         //prepare Global Settings via Company Information
         $invoice->company_id = $company->id;
