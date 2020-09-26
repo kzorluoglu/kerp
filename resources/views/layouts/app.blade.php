@@ -161,6 +161,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('incoming_invoice') }}" class="{{ Route::is('incoming_invoice*') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon pe-7s-copy-file"></i>
+                                    {{__('app.incoming_invoices')}}
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('offer') }}" class="{{ Route::is('offer*') ? 'mm-active' : '' }}">
                                     <i class="metismenu-icon pe-7s-copy-file"></i>
                                     {{__('app.offers')}}
