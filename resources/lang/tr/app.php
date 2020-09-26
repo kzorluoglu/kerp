@@ -3,6 +3,7 @@
 return [
 
     'search' => 'Arama',
+    "filter" => "Filitrele",
     'action' => 'İşlem',
     'next' => 'İleri',
     'edit' => 'Düzenle',
@@ -23,6 +24,7 @@ return [
     'invoices' => 'Faturalar',
     'offers' => 'Teklifler',
     "contracts" => "Sözleşmeler",
+    "overview" => "Genel Bakış",
     'login' => 'Giriş',
     'register' => 'Kayıt',
     'logout' => 'Çıkış',

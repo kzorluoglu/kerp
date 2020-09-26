@@ -17,7 +17,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    
+
     <link href="{{ asset('main.css') }}" rel="stylesheet">
     @show
 
@@ -31,7 +31,7 @@
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header" id="app">
         <div class="app-header header-shadow">
             <div class="app-header__logo">
-            <a href="{{ route('start') }}"><div class="logo-src"></div></a> 
+            <a href="{{ route('start') }}"><div class="logo-src"></div></a>
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -59,7 +59,7 @@
                         </span>
                     </button>
                 </span>
-            </div>    
+            </div>
             <div class="app-header__content">
                 <div class="app-header-right">
 
@@ -76,7 +76,7 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('app.logout') }}</a>
-        
+
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
@@ -89,7 +89,7 @@
         <div class="app-main">
             <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
-                <a href="{{ route('start') }}"><div class="logo-src"></div></a> 
+                <a href="{{ route('start') }}"><div class="logo-src"></div></a>
                     <div class="header__pane ml-auto">
                         <div>
                             <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -117,7 +117,7 @@
                             </span>
                         </button>
                     </span>
-                </div>    
+                </div>
                 <div class="scrollbar-sidebar">
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
@@ -172,13 +172,19 @@
                                     {{__('app.contracts')}}
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ route('overview') }}" class="{{ Route::is('overview*') ? 'mm-active' : '' }}">
+                                    <i class="metismenu-icon pe-7s-copy-file"></i>
+                                    {{__('app.overview')}}
+                                </a>
+                            </li>
                             @endauth
                         </ul>
                     </div>
                 </div>
             </div>
 
-            
+
             <div class="app-main__outer" id="app">
                 <div class="app-main__inner">
 
@@ -212,10 +218,10 @@
                     @yield('content')
 
 
-            
 
 
-                    
+
+
                 </div>
             </div>
 
@@ -226,7 +232,7 @@
 
 
     @endauth
-            
+
     @guest
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         @if (session('type'))

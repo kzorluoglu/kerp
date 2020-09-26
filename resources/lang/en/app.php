@@ -3,6 +3,7 @@
 return [
 
     'search' => 'Search',
+    "filter" => "Filter",
     'action' => 'Action',
     'next' => 'Next',
     'edit' => 'Edit',
@@ -23,6 +24,7 @@ return [
     'invoices' => 'Invoices',
     'offers' => 'Offers',
     "contracts" => "Contracts",
+    "overview" => "Overview",
     'login' => 'Login',
     'register' => 'Register',
     'logout' => 'Logout',
