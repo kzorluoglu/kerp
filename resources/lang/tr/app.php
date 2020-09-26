@@ -22,6 +22,7 @@ return [
     'companies' => 'Firmalar',
     'customers' => 'Müşteriler',
     'invoices' => 'Faturalar',
+    "incoming_invoices" => "Gelen Faturalar",
     'offers' => 'Teklifler',
     "contracts" => "Sözleşmeler",
     "overview" => "Genel Bakış",

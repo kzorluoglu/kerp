@@ -83,10 +83,31 @@ Route::middleware('auth')->group(function () {
        Route::get('/autocomplete/invoiceproduct', 'InvoiceController@autocompleteProduct');
 
        Route::get('paid/{id}', 'InvoiceController@paid')->name('invoice.paid');
-
-
   });
 
+    Route::prefix('incoming_invoice')->group(function () {
+        Route::get('/', 'IncomingInvoiceController@index')->name('incoming_invoice');
+        Route::get('select', 'IncomingInvoiceController@select')->name('incoming_invoice.select');
+        Route::post('store', 'IncomingInvoiceController@store')->name('incoming_invoice.store');
+        Route::get('prepare/{id}', 'IncomingInvoiceController@prepare')->name('incoming_invoice.prepare');
+        Route::post('update', 'IncomingInvoiceController@update')->name('incoming_invoice.update');
+        Route::get('delete/{id}', 'IncomingInvoiceController@delete')->name('incoming_invoice.delete');
+        Route::get('pdf/{id}', 'IncomingInvoiceController@pdf')->name('incoming_invoice.pdf');
+        Route::get('download/{id}', 'IncomingInvoiceController@download')->name('incoming_invoice.download');
+
+        //Prepare or Invoices Products Routes
+        Route::post('saveproduct', 'IncomingInvoiceController@saveProduct')->name('incoming_invoice.saveproduct');
+        Route::post('updateproduct', 'IncomingInvoiceController@updateProduct')->name('incoming_invoice.updateproduct');
+        Route::get('deleteproduct/{id}', 'IncomingInvoiceController@deleteProduct')->name('incoming_invoice.deleteproduct');
+
+        Route::post('updateinformation', 'IncomingInvoiceController@updateInformation')->name('incoming_invoice.updateinformation');
+
+        Route::get('/autocomplete/invoicecompany', 'IncomingInvoiceController@autocompleteInvoiceCompany');
+        Route::get('/autocomplete/invoicecustomer', 'IncomingInvoiceController@autocompleteInvoiceCustomer');
+        Route::get('/autocomplete/invoiceproduct', 'IncomingInvoiceController@autocompleteProduct');
+
+        Route::get('paid/{id}', 'IncomingInvoiceController@paid')->name('incoming_invoice.paid');
+    });
 
   Route::prefix('offer')->group(function () {
     Route::get('/', 'OfferController@index')->name('offer');
