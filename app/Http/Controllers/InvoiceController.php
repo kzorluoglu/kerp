@@ -161,13 +161,13 @@ class InvoiceController extends Controller
             'sum_tax' => $sum_tax,
             'sum_total' => $sum_total
         ];
-        
+
         $pdfName = $invoice->firstname."-".$invoice->lastname."-".$invoice->invoice_number;
         if($invoice->company_name){
             $pdfName = $invoice->company_name."-".$invoice->invoice_number;
         }
         $pdfName =  Str::slug($pdfName, '-');
-        
+
         return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
     }
 
@@ -209,8 +209,8 @@ class InvoiceController extends Controller
     public function saveProduct(Request $request)
     {
         $invoiceProduct = new InvoiceProduct();
-        $invoiceProduct->count = str_replace('.', '', $request->count);
-        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
+        $invoiceProduct->count = str_replace(',', '.', $request->count);
+        $invoiceProduct->count = floatval($invoiceProduct->count);
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
@@ -232,12 +232,12 @@ class InvoiceController extends Controller
     public function updateProduct(Request $request)
     {
         $invoiceProduct = InvoiceProduct::find($request->id);
-        $invoiceProduct->count = str_replace('.', '', $request->count);
-        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
-        
+        $invoiceProduct->count = str_replace(',', '.', $request->count);
+        $invoiceProduct->count = floatval($invoiceProduct->count);
+
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
-        
+
         $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
         $invoiceProduct->title = $request->title;
         $invoiceProduct->type = $request->type;
@@ -278,5 +278,5 @@ class InvoiceController extends Controller
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
     }
- 
+
 }
