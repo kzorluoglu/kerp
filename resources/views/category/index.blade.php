@@ -8,15 +8,15 @@
             <div class="page-title-icon">
                 <i class="pe-7s-drawer icon-gradient bg-happy-itmeo"></i>
             </div>
-            <div>KATEGORİLER
-                <div class="page-title-subheading">Firmanıza ait ürün kategorileri bu alanda görebilir, değiştirebilir veya ekleyebilirsiniz</div>
+            <div>Categories
+                <div class="page-title-subheading">Categories</div>
             </div>
-        </div>     
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md">
-        <a href="{{route('category.new')}}" class="mb-2 mr-2 btn btn-primary">{{__('category.new_category')}}</a> 
+        <a href="{{route('category.new')}}" class="mb-2 mr-2 btn btn-primary">{{__('category.new_category')}}</a>
     </div>
     <div class="col-md">
         {{ Form::open(['route' => 'category', 'method' => 'get']) }}
@@ -75,6 +75,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
