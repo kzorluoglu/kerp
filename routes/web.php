@@ -92,8 +92,6 @@ Route::middleware('auth')->group(function () {
         Route::get('prepare/{id}', 'IncomingInvoiceController@prepare')->name('incoming_invoice.prepare');
         Route::post('update', 'IncomingInvoiceController@update')->name('incoming_invoice.update');
         Route::get('delete/{id}', 'IncomingInvoiceController@delete')->name('incoming_invoice.delete');
-        Route::get('pdf/{id}', 'IncomingInvoiceController@pdf')->name('incoming_invoice.pdf');
-        Route::get('download/{id}', 'IncomingInvoiceController@download')->name('incoming_invoice.download');
 
         //Prepare or Invoices Products Routes
         Route::post('saveproduct', 'IncomingInvoiceController@saveProduct')->name('incoming_invoice.saveproduct');

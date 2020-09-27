@@ -12,5 +12,5 @@
 @endsection
 
 @section('content')
-    @include('invoice.invoice')
+    @include('incoming_invoice.invoice')
 @endsection
