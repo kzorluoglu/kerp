@@ -10,4 +10,6 @@ return [
     'sum' => 'Ara Toplam',
     'tax' => 'Vergi',
     'total_sum' => 'Toplam',
+    'outgoing_invoices' => 'Kesilen Faturalar',
+    'incoming_invoices' => 'Gelen Faturalar'
 ];

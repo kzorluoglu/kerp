@@ -8,8 +8,8 @@
                 <i class="pe-7s-drawer icon-gradient bg-happy-itmeo"></i>
             </div>
             <div>
-                {{__('invoice.page_title')}}
-                <div class="page-title-subheading">{{__('invoice.page_description')}}</div>
+                {{__('incoming_invoice.page_title')}}
+                <div class="page-title-subheading">{{__('incoming_invoice.page_description')}}</div>
             </div>
         </div>
     </div>

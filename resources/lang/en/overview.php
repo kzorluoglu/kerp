@@ -10,4 +10,6 @@ return [
     'sum' => 'Sum',
     'tax' => 'Tax',
     'total_sum' => 'Total Sum',
+    'outgoing_invoices' => 'Outgoing Invoices',
+    'incoming_invoices' => 'Incoming Invoices'
 ];
