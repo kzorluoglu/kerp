@@ -22,7 +22,7 @@
             <div class="input-group-prepend">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon1">{{__('app.filter')}}</button>
             </div>
-            {{ Form::text('year', null, ['class' => 'form-control']) }}
+            {{ Form::select('year', $years, $selectedYear, ['placeholder' => __('app.select_year')]) }}
         </div>
     </div>
 </div>
@@ -31,6 +31,7 @@
     <div class="col-lg-12">
         <div class="main-card mb-3 card">
             <div class="card-body">
+                <h1>{{ __('overview.outgoing_invoices') }}</h1>
                 @if(count($invoices) > 0)
                 {{ Form::close() }}
                 <table class="mb-0 table table-hover">
@@ -85,14 +86,15 @@
     <div class="col-lg-12">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                @if(count($incoming_invoices) > 0)
+                <h1>{{ __('overview.incoming_invoices') }}</h1>
+            @if(count($incoming_invoices) > 0)
                     {{ Form::close() }}
                     <table class="mb-0 table table-hover">
                         <thead>
                         <tr>
                             <th width="100" scope="col">{{__('overview.invoice_number')}}</th>
+                            <th width="100" scope="col">{{__('incoming_invoice.intern_number')}}</th>
                             <th scope="col">{{__('overview.date')}}</th>
-
                             <th scope="col">{{__('overview.company_name')}} ( {{__('overview.firstname')}}, {{__('overview.lastname')}} )</th>
                             <th scope="col">{{__('overview.sum')}} </th>
                             <th scope="col">{{__('overview.tax')}} </th>
@@ -103,8 +105,8 @@
                         @foreach($incoming_invoices as $invoice)
                             <tr>
                                 <th scope="row">{{ $invoice->invoice_number }} @if($invoice->paid) <span class="badge badge-success badge-pill">{{ __('invoice.paid')}}</span> @endif</th>
+                                <td>{{ $invoice->intern_invoice_number }}</td>
                                 <td>{{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}</td>
-
                                 <td>{{ $invoice->company_name }} ({{ $invoice->firstname }} {{ $invoice->lastname }})</td>
                                 <td>{!! number_format($invoice->sum_total_without_tax, 2, ',', '.') !!} {!! $invoice->company->currency !!}</td>
                                 <td>{!! number_format($invoice->sum_tax, 2, ',', '.') !!} {!! $invoice->company->currency !!}</td>
@@ -114,6 +116,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td class="text-right">{{__('overview.total_sum')}}</td>
