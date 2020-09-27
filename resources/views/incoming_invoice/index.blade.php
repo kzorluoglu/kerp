@@ -17,10 +17,10 @@
 
 <div class="row">
     <div class="col-md">
-        <a href="{{route('invoice.select')}}" class="mb-2 mr-2 btn btn-primary">{{__('incoming_invoice.new_invoice')}}</a>
+        <a href="{{route('incoming_invoice.select')}}" class="mb-2 mr-2 btn btn-primary">{{__('incoming_invoice.new_invoice')}}</a>
     </div>
     <div class="col-md">
-        {{ Form::open(['route' => 'invoice', 'method' => 'get']) }}
+        {{ Form::open(['route' => 'incoming_invoice', 'method' => 'get']) }}
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon1">{{__('app.search')}}</button>
@@ -60,16 +60,14 @@
                                 <td>{{ $invoice->company_name }}</td>
                                 <td>{{ $invoice->city }}</td>
                                 <td>
-                                    <a href="{{ route('invoice.prepare', $invoice->id) }}" class="mb-2 mr-2 btn btn-light"><i class="metismenu-icon pe-7s-pen"></i></a>
-                                    <a href="{{ route('invoice.paid', $invoice->id) }}" title="{{ __('invoice.paid')}}" class="mb-2 mr-2 btn btn-primary"><i class="metismenu-icon pe-7s-cash"></i></a>
-                                    <a class="mb-2 mr-2 btn btn-success" title="{!! __('invoice.pdf_preview') !!}" target="_blank" href="{{ route('invoice.pdf', $invoice->id ) }}"><i class="metismenu-icon pe-7s-file"></i></a>
-                                    <a class="mb-2 mr-2 btn btn-success" title="{!! __('invoice.download') !!}" target="_blank" href="{{ route('invoice.download', $invoice->id ) }}"><i class="metismenu-icon pe-7s-download"></i></a>
+                                    <a href="{{ route('incoming_invoice.prepare', $invoice->id) }}" class="mb-2 mr-2 btn btn-light"><i class="metismenu-icon pe-7s-pen"></i></a>
+                                    <a href="{{ route('incoming_invoice.paid', $invoice->id) }}" title="{{ __('invoice.paid')}}" class="mb-2 mr-2 btn btn-primary"><i class="metismenu-icon pe-7s-cash"></i></a>
                                     <a class="mb-2 mr-2 btn btn-danger" href="#"
                                         onclick="event.preventDefault();
                                         document.getElementById('remove-form{{ $invoice->id }}').submit();">
                                         <i class="metismenu-icon pe-7s-trash"></i>
                                     </a>
-                                    {{ Form::open(['route' => ['invoice.delete', $invoice->id ], 'method' => 'get', 'id' => 'remove-form'.$invoice->id]) }}
+                                    {{ Form::open(['route' => ['incoming_invoice.delete', $invoice->id ], 'method' => 'get', 'id' => 'remove-form'.$invoice->id]) }}
                                     @csrf
                                     {{ Form::close() }}
                                 </td>

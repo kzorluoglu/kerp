@@ -18,8 +18,8 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('invoice_number', 255);
-            $table->string('firstname', 255);
-            $table->string('lastname', 255);
+            $table->string('firstname', 255)->nullable();
+            $table->string('lastname', 255)->nullable();
             $table->string('company_name', 255)->nullable();
             $table->string('street', 255);
             $table->string('streetnumber', 255);
