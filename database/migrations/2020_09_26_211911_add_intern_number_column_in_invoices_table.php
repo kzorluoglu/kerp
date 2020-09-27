@@ -14,7 +14,7 @@ class AddInternNumberColumnInInvoivesTable extends Migration
     public function up()
     {
         Schema::table('invoices', function (Blueprint $table) {
-            $table->string('intern_invoice_number', 255);
+            $table->string('intern_invoice_number', 255)->nullable();
         });
     }
 
