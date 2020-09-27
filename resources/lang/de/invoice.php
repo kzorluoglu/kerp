@@ -14,7 +14,7 @@ return [
     'product_title' => 'Artikel',
     'product_price' => 'Preis',
     'product_type' => 'Einheit',
-    'product_count' => 'Stück',  
+    'product_count' => 'Stück',
     'firstname' => 'Vorname',
     'lastname' => 'Nachname',
     'company_name' => 'Firma',
@@ -23,6 +23,7 @@ return [
     'sum_total_prices' => 'Zwischensumme',
     'tax' => 'gesetzl. MwSt.',
     'no_tax' => 'ohne MwSt.',
+    'tax_rate' => 'MwSt-Kennz.',
     'sum_total' => 'Gesamtpreis',
     'bank_information' => 'Bankverbindung',
     'add' => 'Neue Artikel anlegen',
@@ -37,11 +38,11 @@ return [
     'product_updated' => 'Produkt wurde aktualisiert.',
     'product_deleted' => 'Produkt wurde gelöscht.',
     'deleted' => 'Rechnung wurde gelöscht.',
-    
+
     "page_title" => "RECHNUNGEN",
     "form_title" => "Rechnungen hinzufügen / bearbeiten",
     "page_description" => "Hier können Sie Ihre Rechnungen aktualisieren oder anlegen.",
-        
+
     "paid" => "Bezahlt",
     "paid_date" => "Bezahlter Datum",
     "paid_information" => "Bezahlte Informationen",

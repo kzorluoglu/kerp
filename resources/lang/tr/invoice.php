@@ -13,7 +13,7 @@ return [
     'date' => 'Tarih',
     'product_title' => 'Ürün',
     'product_price' => 'Fiyat',
-    'product_count' => 'Adet',  
+    'product_count' => 'Adet',
     'product_type' => 'Birim',
     'firstname' => 'Adı',
     'lastname' => 'Soyadı',
@@ -23,6 +23,7 @@ return [
     'sum_total_prices' => 'Ara Toplam',
     'tax' => 'Vergi Oranı.',
     'no_tax' => 'Vergisiz',
+    'tax_rate' => 'Vergi Yüzdesi',
     'sum_total' => 'Toplam',
     'bank_information' => 'Banka Bilgileri',
     'add' => 'Yeni Ürün ekle',
@@ -41,7 +42,7 @@ return [
     "page_title" => "FATURALAR",
     "form_title" => "FATURA EKLEME",
     "page_description" => "Firmanıza ait faturalar bu alanda görebilir, değiştirebilir veya ekleyebilirsiniz",
-    
+
     "paid" => "Tahsil Edildi",
     "paid_date" => "Tahsil Tarihi",
     "paid_information" => "Tahsil Açıklaması",
