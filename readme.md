@@ -2,6 +2,13 @@
 Open Source Simple Invoice and Offer Tool with Customers and Companies.
 
 # Features
+ - **Overview (New Added - 27.09.2020)**
+   - Outgoing Invoices with Tax per Year
+   - Incoming Invoices with Tax per Year
+ - **Incoming Invoices (New Added - 27.09.2020)**
+   - Intern Number per Invoice
+   - Pad <-> Unpoad Option
+   - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
  - Invoices
    - Paid <-> Unpaid Option
    - PDF Download and Preview Option
