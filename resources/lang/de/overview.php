@@ -10,4 +10,6 @@ return [
     'sum' => 'Summe',
     'tax' => 'mwSt.',
     'total_sum' => 'Gesamtsume',
+    'outgoing_invoices' => 'Ausgehende Rechnungen',
+    'incoming_invoices' => 'Eingehende Rechungen'
 ];

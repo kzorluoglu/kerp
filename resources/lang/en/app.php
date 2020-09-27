@@ -4,6 +4,7 @@ return [
 
     'search' => 'Search',
     "filter" => "Filter",
+    "select_year" => "Please select a Year",
     'action' => 'Action',
     'next' => 'Next',
     'edit' => 'Edit',
