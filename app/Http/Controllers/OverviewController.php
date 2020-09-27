@@ -19,20 +19,21 @@ class OverviewController extends Controller
     public function index(Request $request)
     {
 
-        $year = $request->input('year');
+        $selectedYear = $request->input('year');
 
-        if (isset($year)) {
-            $invoices = Invoice::whereYear('date', '=', $year)->get();
+        if (isset($selectedYear)) {
+            $invoices = Invoice::whereYear('date', '=', $selectedYear)->get();
         } else {
             $invoices = Invoice::all();
         }
 
-        if(isset($year)) {
-            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->whereYear('date', '=', $year)->get();
+        if(isset($selectedYear)) {
+            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->whereYear('date', '=', $selectedYear)->get();
         }else {
             $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->get();
         }
 
+        $years = $this->getYears();
 
         return view(
             'overview.index',
@@ -45,6 +46,8 @@ class OverviewController extends Controller
                 'incoming_invoicesTotalSumWithoutTax' => $this->getInvoiceTotalSumWithoutTax($incoming_invoices),
                 'incoming_invoicesTotalSumTax' => $this->getInvoiceTotalSumTax($incoming_invoices),
                 'incoming_invoicesTotalSum' => $this->getInvoiceTotalSum($incoming_invoices),
+                'years' => $years,
+                'selectedYear' => $selectedYear,
             ]
         );
     }
@@ -94,5 +97,16 @@ class OverviewController extends Controller
 
         return $total;
 
+    }
+
+    /**
+     * @return array
+     */
+    private function getYears(): array
+    {
+        $range = range(date('Y'), 1989);
+        $range2 = range(date('Y'), 1989);
+
+        return array_combine($range, $range2);
     }
 }
