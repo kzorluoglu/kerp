@@ -103,8 +103,6 @@
                     <div class="col-md-2 font-weight-bold">{!! __('app.action') !!}</div>
                 </div>
 
-
-                <!-- Article Row -->
                 @if($invoice->products)
                     @foreach($invoice->products as $product)
                         {!!  Form::open(['route' => ['invoice.updateproduct'], 'id'=>'productform'.$loop->iteration]) !!}
@@ -153,11 +151,8 @@
                         </div>
                     @endforeach
                 @endif
-            <!-- Article Row -->
 
-
-                <!-- New Article Row -->
-                {!!  Form::open(['route' => ['invoice.saveproduct'], 'id'=>'productform0']) !!}
+                {!! Form::open(['route' => ['invoice.saveproduct'], 'id'=>'productform0']) !!}
                 {{ Form::hidden('invoice_id', $invoice->id )}}
                 <div class="row mt-5 mb-3">
                     <div class="col font-weight-bold">{!! __("invoice.add") !!}</div>
@@ -185,11 +180,8 @@
                         <button type="submit" class="btn btn-primary">&check;</button>
                     </div>
                 </div>
-            {!!  Form::close() !!}
-            <!-- New Article Row -->
+                {!!  Form::close() !!}
 
-
-                <!-- Total Row -->
                 <div class="row p-5">
                     <div class="col-md">
                         <table align="right" style="font-size:16px;">
@@ -216,7 +208,6 @@
                         </table>
                     </div>
                 </div>
-                <!-- Total Row -->
             </div>
         </div>
     </div>
@@ -234,11 +225,7 @@
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-
-
         $(document).on('change', "input[id^='title']", function (event) {
-
-
             var val = $(this).val();
             var rowId = $(this).data('rowid');
 
@@ -256,6 +243,5 @@
                 $('#type' + rowId).val(type);
             }
         });
-
     </script>
 @endsection
