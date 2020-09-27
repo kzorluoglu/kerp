@@ -85,16 +85,7 @@ class IncomingInvoiceController extends Controller
 
         //prepare Global Settings via Company Information
         $invoice->company_id = $company->id;
-
-        //Set as Default From Company
-        $invoice->tax_rate = $company->tax_rate;
-        $invoice->information = $company->information;
-
-        // If Customer Speical Tax Rate has
-        if ($customer->tax_rate) {
-            $invoice->tax_rate = $customer->tax_rate;
-        }
-
+        $invoice->tax_rate = $customer->tax_rate;
         $invoice->firstname = $customer->firstname;
         $invoice->lastname = $customer->lastname;
         $invoice->company_name = $customer->company_name;
@@ -223,6 +214,9 @@ class IncomingInvoiceController extends Controller
     public function updateInformation(Request $request)
     {
         $invoice = Invoice::withoutGlobalScopes()->find($request->id);
+        $invoice->date = \Carbon\Carbon::parse($request->date)->format('Y-m-d');
+        $invoice->invoice_number = $request->invoice_number;
+        $invoice->tax_rate = $request->tax_rate;
         $invoice->information = $request->information;
         $invoice->payment_deadline_day = $request->payment_deadline_day;
         $invoice->payment_type = $request->payment_type;

@@ -27,6 +27,12 @@ class OverviewController extends Controller
             $invoices = Invoice::all();
         }
 
+        if(isset($year)) {
+            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->whereYear('date', '=', $year)->get();
+        }else {
+            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->get();
+        }
+
 
         return view(
             'overview.index',
@@ -35,6 +41,10 @@ class OverviewController extends Controller
                 'invoiceTotalSumWithoutTax' => $this->getInvoiceTotalSumWithoutTax($invoices),
                 'invoiceTotalSumTax' => $this->getInvoiceTotalSumTax($invoices),
                 'invoiceTotalSum' => $this->getInvoiceTotalSum($invoices),
+                'incoming_invoices' => $incoming_invoices,
+                'incoming_invoicesTotalSumWithoutTax' => $this->getInvoiceTotalSumWithoutTax($incoming_invoices),
+                'incoming_invoicesTotalSumTax' => $this->getInvoiceTotalSumTax($incoming_invoices),
+                'incoming_invoicesTotalSum' => $this->getInvoiceTotalSum($incoming_invoices),
             ]
         );
     }

@@ -16,28 +16,12 @@
 
 {{ Form::open(['route' => 'incoming_invoice.store', 'method' => 'post']) }}
 <div class="row">
+
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body">
                 <div class="position-relative form-group">
-                    <label for="">{{ __('invoice.select_company')}}</label>
-                    <select class="selectpicker" name="company_id" required data-live-search="true">
-                    <option value="">{{ __('invoice.please_select_company') }}</option>
-                    @foreach($companies as $company)
-                        <option value="{{$company->id}}">{{$company->company_name}}, {{$company->firstname}}, {{$company->lastname}}</option>
-                    @endforeach
-                    </select>
-                </div>
-                @foreach($companies as $company)
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="main-card mb-3 card">
-            <div class="card-body">
-                <div class="position-relative form-group">
-                    <label for="">{{ __('invoice.select_customer')}}</label>
+                    <label for="">{{ __('incoming_invoice.from')}}</label>
                     <select class="selectpicker" name="customer_id" required data-live-search="true">
                     <option value="">{{ __('invoice.please_select_customer') }}</option>
                     @foreach($customers as $customer)
@@ -45,6 +29,23 @@
                     @endforeach
                     </select>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <div class="position-relative form-group">
+                    <label for="">{{ __('incoming_invoice.to')}}</label>
+                    <select class="selectpicker" name="company_id" required data-live-search="true">
+                        <option value="">{{ __('invoice.please_select_company') }}</option>
+                        @foreach($companies as $company)
+                            <option value="{{$company->id}}">{{$company->company_name}}, {{$company->firstname}}, {{$company->lastname}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                @foreach($companies as $company)
+                @endforeach
             </div>
         </div>
     </div>
