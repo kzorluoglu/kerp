@@ -6,15 +6,15 @@
                 <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
                 </i>
             </div>
-            <div>KATEGORİ EKLEME / DÜZENLEME</div>
-        </div>     
+            <div>Categories</div>
+        </div>
     </div>
-</div> 
+</div>
 <div class="row">
     {{  Form::hidden('user_id', Auth::user()->id) }}
 
     @if($category->id)
-    {{  Form::hidden('id', $category->id) }}
+        {{  Form::hidden('id', $category->id) }}
     @endif
 
     <div class="col-md-6">
@@ -27,7 +27,9 @@
                 </div>
                 <div class="position-relative form-group">
                     {{  Form::label('category.description', __('category.description')) }}
-                    <textarea inputname="description" inputvalue="@if($category->description){!! $category->description !!}@endif" id="exampleText" class="form-control"></textarea>
+                    <textarea inputname="description"
+                              inputvalue="@if($category->description){!! $category->description !!}@endif"
+                              id="exampleText" class="form-control"></textarea>
                 </div>
             </div>
         </div>
@@ -36,10 +38,10 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 @if($category->image)
-                <div class="position-relative form-group">
-                    <img src="{{ Storage::url($category->image)}}" class="img-thumbnail" style="max-width:200px">
-                </div>
-                 @endif
+                    <div class="position-relative form-group">
+                        <img src="{{ Storage::url($category->image)}}" class="img-thumbnail" style="max-width:200px">
+                    </div>
+                @endif
                 <div class="position-relative form-group">
                     {{  Form::label('category.image', __('category.image')) }}
                     {{  Form::file('image', null, ['class' => 'form-control']) }}
@@ -51,9 +53,9 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 @if($category->id)
-                  {{ Form::submit(__('app.update'), ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit(__('app.update'), ['class' => 'btn btn-primary']) }}
                 @else
-                  {{ Form::submit(__('app.save'), ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit(__('app.save'), ['class' => 'btn btn-primary']) }}
                 @endif
             </div>
         </div>

@@ -6,13 +6,11 @@
                 <i class="pe-7s-drawer icon-gradient bg-happy-itmeo"></i>
             </div>
             <div>{{__('customer.form_title')}}</div>
-        </div>     
+        </div>
     </div>
-</div> 
-
+</div>
 
 <div class="row">
-
     @if($customer->id)
         {{  Form::hidden('id', $customer->id) }}
     @endif
@@ -45,7 +43,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-6">
         <div class="main-card mb-3 card">
             <div class="card-body">

@@ -156,8 +156,8 @@ class IncomingInvoiceController extends Controller
     public function saveProduct(Request $request)
     {
         $invoiceProduct = new InvoiceProduct();
-        $invoiceProduct->count = str_replace('.', '', $request->count);
-        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
+        $invoiceProduct->count = str_replace(',', '.', $request->count);
+        $invoiceProduct->count = floatval($invoiceProduct->count);
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
@@ -179,8 +179,8 @@ class IncomingInvoiceController extends Controller
     public function updateProduct(Request $request)
     {
         $invoiceProduct = InvoiceProduct::find($request->id);
-        $invoiceProduct->count = str_replace('.', '', $request->count);
-        $invoiceProduct->count = str_replace(',', '.', $invoiceProduct->count);
+        $invoiceProduct->count = str_replace(',', '.', $request->count);
+        $invoiceProduct->count = floatval($invoiceProduct->count);
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);

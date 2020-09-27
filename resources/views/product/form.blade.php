@@ -8,12 +8,12 @@
                 </i>
             </div>
             <div>{{__('product.form_title')}}</div>
-        </div>     
+        </div>
     </div>
-</div> 
+</div>
 <div class="row">
     @if($product->id)
-      {{  Form::hidden('id', $product->id) }}
+        {{  Form::hidden('id', $product->id) }}
     @endif
     <div class="col-md-6">
         <div class="main-card mb-3 card">
@@ -25,13 +25,15 @@
                 </div>
                 <div class="position-relative form-group">
                     {{  Form::label('product.description', __('product.description')) }}
-                    <texteditor inputname="description" inputvalue="@if($product->description){!! $product->description !!}@endif" id="exampleText"></texteditor>
-                
+                    <texteditor inputname="description"
+                                inputvalue="@if($product->description){!! $product->description !!}@endif"
+                                id="exampleText"></texteditor>
+
                 </div>
                 @if($product->image)
-                <div class="position-relative form-group">
-                    <img src="{{ Storage::url($product->image)}}" class="img-thumbnail" style="max-width:200px">
-                </div>
+                    <div class="position-relative form-group">
+                        <img src="{{ Storage::url($product->image)}}" class="img-thumbnail" style="max-width:200px">
+                    </div>
                 @endif
                 <div class="position-relative form-group">
                     {{  Form::label('product.image', __('product.image')) }}
@@ -59,9 +61,9 @@
                 <div class="position-relative form-group">
                     {{  Form::label('product.type',  __('product.type')) }}
                     @if($product->type)
-                    @include('product.type', ['type' => $product->type ])
+                        @include('product.type', ['type' => $product->type ])
                     @else
-                    @include('product.type', ['type' => null ])
+                        @include('product.type', ['type' => null ])
                     @endif
                     <small class="form-text text-muted">{{ __('app.required_input') }}</small>
                 </div>
@@ -72,9 +74,9 @@
         <div class="main-card mb-3 card">
             <div class="card-body">
                 @if($product->id)
-                  {{ Form::submit(__('app.update'), ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit(__('app.update'), ['class' => 'btn btn-primary']) }}
                 @else
-                  {{ Form::submit(__('app.save'), ['class' => 'btn btn-primary']) }}
+                    {{ Form::submit(__('app.save'), ['class' => 'btn btn-primary']) }}
                 @endif
             </div>
         </div>
