@@ -4,6 +4,7 @@ return [
 
     "search" => "Suche",
     "filter" => "Filtern",
+    "select_year" => "Bitte ein Jahr auswählen",
     "action" => "Aktionen",
     "next" => "Weiter",
     "edit" => "Bearbeiten",

@@ -4,6 +4,7 @@ return [
 
     'search' => 'Arama',
     "filter" => "Filitrele",
+    "select_year" => "Lütfen bir Yil seciniz",
     'action' => 'İşlem',
     'next' => 'İleri',
     'edit' => 'Düzenle',
