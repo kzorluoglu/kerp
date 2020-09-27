@@ -1,18 +1,16 @@
-<!-- ALT BİLGİ Row -->
 <div class="row">
     <div class="col-md text-center">
         <a class="btn btn-success" target="_blank" href="{{ route('invoice.pdf', $invoice->id ) }}">{!! __("invoice.pdf_preview") !!}</a>
         <a class="btn btn-success" target="_blank" href="{{ route('invoice.download', $invoice->id ) }}">{!! __("invoice.download") !!}</a>
     </div>
 </div>
-<!-- ALT BİLGİ Row -->
 <br>
 <br>
 <div class="row">
     <div class="col-md">
         <div class="main-card mb-3 card">
             <div class="card-body">
- 
+
             <div class="row">
     <div class="col-sm">
       <br><br><br><br><br><br>
@@ -34,14 +32,14 @@
    </div>
  </div>
  <div class="row">
- <div class="col-md-4 offset-md-8 text-right">  
+ <div class="col-md-4 offset-md-8 text-right">
  <br>
     <b>{!!__('invoice.invoice_number')!!}</b><br> {!!$invoice->invoice_number!!} <br>
     <b>{!!__('invoice.date')!!}</b><br> {{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}
 
  </div></div>
 
- 
+
                 <div class="divider"></div>
                 <div class="row">
                     <div class="col-md-3 font-weight-bold pb-4">{!! __('invoice.product_title') !!}</div>
@@ -60,10 +58,10 @@
                     {!!  Form::open(['route' => ['invoice.updateproduct'], 'id'=>'productform'.$loop->iteration]) !!}
                     {{ Form::hidden('id', $product->id )}}
                     <div class="row">
-                        <div class="col-md-3"> 
+                        <div class="col-md-3">
                             <input class="form-control" value="{{ $product->title }}" name="title"  id="title{{$loop->iteration}}" list="productlist" data-rowid="{{$loop->iteration}}" autocomplete="off">
                         </div>
-                        <div class="col-md-2"> 
+                        <div class="col-md-2">
                             <div class="input-group">
                             {{ Form::text('price', number_format($product->price, 2, ',', '.'), ['id' => 'price'.$loop->iteration, 'class' => 'form-control'] )}}
                                 <div class="input-group-prepend">
@@ -135,7 +133,7 @@
                 {!!  Form::close() !!}
                 <!-- New Article Row -->
 
-                
+
                 <!-- Total Row -->
                 <div class="row p-5">
                     <div class="col-md">
@@ -208,7 +206,7 @@
                 <!-- DESCRAPTION Row -->
                 <div class="divider"></div>
 
-                
+
                 <!-- ALT BİLGİ Row -->
                 <div class="row">
                     <div class="col-md-6">
@@ -263,6 +261,6 @@
             $('#type'+rowId).val(type);
         }
 });
- 
+
 </script>
 @endsection
