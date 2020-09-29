@@ -19,11 +19,12 @@ class IncomingInvoiceController extends Controller
 
         $search = $request->input('search');
 
-        $orderRaw = "CAST(invoice_number AS UNSIGNED) DESC";
+        $orderRaw = "CAST(intern_invoice_number AS UNSIGNED) DESC";
         $invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->orderByRaw($orderRaw)->paginate(15);
 
         if ($search) {
             $invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->where('invoice_number', 'like', '%'.$search.'%')
+          ->orWhere('intern_invoice_number', 'like', '%'.$search.'%')
           ->orWhere('firstname', 'like', '%'.$search.'%')
           ->orWhere('lastname', 'like', '%'.$search.'%')
           ->orWhere('company_name', 'like', '%'.$search.'%')
