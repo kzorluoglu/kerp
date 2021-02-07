@@ -2,6 +2,10 @@
 Open Source Simple Invoice and Offer Tool with Customers and Companies.
 
 # Features
+ - Multi Language Support
+   - German
+   - English
+   - Turkish
  - **Overview (New Added - 27.09.2020)**
    - Outgoing Invoices with Tax per Year
    - Incoming Invoices with Tax per Year
