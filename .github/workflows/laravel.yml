@@ -3,7 +3,7 @@ name: Laravel
 on: [push]
 
 jobs:
-  laravel-tests:
+  kerp-tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
