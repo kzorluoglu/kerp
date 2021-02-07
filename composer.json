@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "kzorluoglu/kerp",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Open Source Simple Invoice and Offer Tool with Customers and Companies.",
     "keywords": [
         "erp",
         "system",
@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",

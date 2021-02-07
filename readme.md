@@ -24,31 +24,73 @@ Open Source Simple Invoice and Offer Tool with Customers and Companies.
    - Invoice Information Section
 
 # Screenshots
+ [Homepage](https://i.ibb.co/Mgvy68r/Homepage.png)
+
 ![https://ibb.co/Mgvy68r](https://i.ibb.co/Mgvy68r/Homepage.png)
 
-**Overview (New Added - 27.09.2020)**
+--------------------------
+
+[Overview](https://i.ibb.co/85prpnR/Overview.png) **(New Added - 27.09.2020)**
 
 ![https://i.ibb.co/85prpnR](https://i.ibb.co/85prpnR/Overview.png)
-[https://ibb.co/85prpnR](https://ibb.co/85prpnR)
+
+--------------------------
+
+[Login](https://i.ibb.co/zQPGGJG/Login.png)
 
 ![https://ibb.co/zQPGGJG](https://i.ibb.co/zQPGGJG/Login.png)
 
+--------------------------
+
+[Dashboard](https://i.ibb.co/WxnyJ1V/Dashboard.png)
+
 ![https://ibb.co/WxnyJ1V](https://i.ibb.co/WxnyJ1V/Dashboard.png)
+
+--------------------------
+
+[Customer](https://i.ibb.co/tZKh3fh/Customer.png)
 
 ![https://ibb.co/tZKh3fh](https://i.ibb.co/tZKh3fh/Customer.png)
 
+--------------------------
+
+[Edit/Customer](https://i.ibb.co/hF49jbZ/Edit-Customer.png)
+
 ![https://ibb.co/hF49jbZ](https://i.ibb.co/hF49jbZ/Edit-Customer.png)
+
+--------------------------
+
+[Edit/Product](https://i.ibb.co/grKhb9m/Edit-Product.png)
 
 ![https://ibb.co/grKhb9m](https://i.ibb.co/grKhb9m/Edit-Product.png)
 
+--------------------------
+
+[Invoices](https://i.ibb.co/6Xh561Z/Invoices.png)
+
 ![https://ibb.co/6Xh561Z](https://i.ibb.co/6Xh561Z/Invoices.png)
 
+--------------------------
+
+[Order Overview](https://i.ibb.co/vxXVrVs/Order-Overview.png)
+
 ![https://ibb.co/vxXVrVs](https://i.ibb.co/vxXVrVs/Order-Overview.png)
-[https://ibb.co/vxXVrVs](https://i.ibb.co/vxXVrVs/Order-Overview.png)
+
+--------------------------
+
+[PDF Preview](https://i.ibb.co/4YJ6HB0/PDF-Preview.png)
 
 ![https://ibb.co/4YJ6HB0](https://i.ibb.co/4YJ6HB0/PDF-Preview.png)
 
+--------------------------
+
+[Offer](https://i.ibb.co/9bCxN9c/Offer.png)
+
 ![https://ibb.co/9bCxN9c](https://i.ibb.co/9bCxN9c/Offer.png)
+
+--------------------------
+
+[Product](https://i.ibb.co/sWH8vvd/Product.png)
 
 ![https://ibb.co/sWH8vvd](https://i.ibb.co/sWH8vvd/Product.png)
 
@@ -84,7 +126,7 @@ Start the local development server
 
     php artisan serve
 
-Disable "Register" for Daily use, after Setup.
+**Disable "Register" for Daily use, after Setup.**
 
     Auth::routes(); // replace this line with under..
     Auth::routes(['reset' => true, 'verify' => false, 'register' => false]); // Register Disabled
