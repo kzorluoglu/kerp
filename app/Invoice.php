@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['firstname', 'lastname', 'company_name', 'street',
      'streetnumber', 'postcode', 'city', 'country', 'total_price', 'tax_rate',
      'template', 'pdf_base64', 'date', 'payment_deadline_day'
