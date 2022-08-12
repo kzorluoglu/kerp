@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Company extends Model
 {
@@ -19,12 +20,11 @@ class Company extends Model
     'bic',
     'tax_rate',
     'information',
-    'user_id',
     'standard',
     'bank'
   ];
 
-  public function user()
+  public function user(): BelongsTo
   {
     return $this->belongsTo('App\User');
   }
