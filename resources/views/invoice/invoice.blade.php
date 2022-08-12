@@ -25,7 +25,7 @@
                         {!! $invoice->country !!}<br>
                     </div>
                     <div class="col-sm-3  text-right">
-                        @if($invoice->company->logo)
+                        @if(isset($invoice->company->logo))
                             <img src="{{ Storage::url($invoice->company->logo, 'public')}}" style="max-width:15rem;">
                             <br>
                         @endif
