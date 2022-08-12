@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\InvoiceFactory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class InvoiceTableSeeder extends Seeder
 {
@@ -16,7 +15,12 @@ class InvoiceTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=100; $i++)
+        InvoiceFactory::factory()
+            ->count(50)
+            ->hasProducts(4)
+            ->create();
+
+/*        for($i=1; $i<=100; $i++)
         {
             $now = new \DateTime();
             $date = $now->format('Y-m-d');
@@ -43,6 +47,6 @@ class InvoiceTableSeeder extends Seeder
                 'paid_date' => ($randomPaid === true ? $date : null),
                 'paid_information' =>  Str::random(250),
             ]);
-        }
+        }*/
     }
 }
