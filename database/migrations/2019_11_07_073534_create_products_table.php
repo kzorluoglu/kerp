@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('product_number', 255)->nullable();
             $table->decimal('price', 8, 2);
             $table->integer('stock')->nullable();
-            $table->text('type')->nullable();
+            $table->enum('type', ['m', 'qm', 'piece', 'hour']);
             $table->timestamps();
         });
     }

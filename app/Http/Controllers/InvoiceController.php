@@ -210,12 +210,12 @@ class InvoiceController extends Controller
     {
         $invoiceProduct = new InvoiceProduct();
         $invoiceProduct->count = str_replace(',', '.', $request->count);
-        $invoiceProduct->count = floatval($invoiceProduct->count);
+        $invoiceProduct->count = (float)$invoiceProduct->count;
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
 
-        $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
+        $invoiceProduct->total = (float)$invoiceProduct->price * (float)$invoiceProduct->count;
         $invoiceProduct->title = $request->title;
         $invoiceProduct->invoice_id = $request->invoice_id;
         $invoiceProduct->type = $request->type;
@@ -233,12 +233,12 @@ class InvoiceController extends Controller
     {
         $invoiceProduct = InvoiceProduct::find($request->id);
         $invoiceProduct->count = str_replace(',', '.', $request->count);
-        $invoiceProduct->count = floatval($invoiceProduct->count);
+        $invoiceProduct->count = (float)$invoiceProduct->count;
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
 
-        $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
+        $invoiceProduct->total = (float)$invoiceProduct->price * $invoiceProduct->count;
         $invoiceProduct->title = $request->title;
         $invoiceProduct->type = $request->type;
 
