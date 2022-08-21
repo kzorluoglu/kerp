@@ -31,7 +31,7 @@ class InvoiceFactory extends Factory
             'streetnumber' => $this->faker->numberBetween(1, 100),
             'postcode' => $this->faker->numberBetween(1, 100),
             'city' => $this->faker->city,
-            'company_id' => $this->faker->numberBetween(1, 6)
+            'company_id' => $this->faker->numberBetween(1, 5)
 
         ];
     }
