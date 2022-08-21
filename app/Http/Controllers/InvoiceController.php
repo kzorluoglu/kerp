@@ -145,7 +145,7 @@ class InvoiceController extends Controller
             return view('invoice.pdf', $data);
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->stream();
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->stream();
     }
 
     public function download(Request $request)
@@ -169,7 +169,7 @@ class InvoiceController extends Controller
         }
         $pdfName =  Str::slug($pdfName, '-');
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
     }
 
     public function paid($id)
