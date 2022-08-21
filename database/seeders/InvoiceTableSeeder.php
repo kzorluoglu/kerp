@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Database\Factories\InvoiceFactory;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class InvoiceTableSeeder extends Seeder

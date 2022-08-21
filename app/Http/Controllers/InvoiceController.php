@@ -133,6 +133,7 @@ class InvoiceController extends Controller
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
 
+
         $data = [
         'invoice' => $invoice,
         'sum_price_total' => $sum_price_total,
@@ -144,7 +145,7 @@ class InvoiceController extends Controller
             return view('invoice.pdf', $data);
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->stream();
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->stream();
     }
 
     public function download(Request $request)
@@ -168,7 +169,7 @@ class InvoiceController extends Controller
         }
         $pdfName =  Str::slug($pdfName, '-');
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
     }
 
     public function paid($id)
@@ -197,8 +198,8 @@ class InvoiceController extends Controller
     public function delete($id)
     {
         try {
-            $invoiceProducts = InvoiceProduct::where('invoice_id', $id)->delete();
-            $invoice = Invoice::find($id)->delete();
+            InvoiceProduct::where('invoice_id', $id)->delete();
+            Invoice::find($id)->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('invoice.deleted')]);
         } catch (\Exception $e) {
@@ -243,7 +244,7 @@ class InvoiceController extends Controller
         $invoiceProduct->type = $request->type;
 
         try {
-            $status = $invoiceProduct->save();
+            $invoiceProduct->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('invoice.product_updated')]);
         } catch (\Exception $e) {
@@ -256,7 +257,7 @@ class InvoiceController extends Controller
         $invoiceProduct = InvoiceProduct::find($id);
 
         try {
-            $status = $invoiceProduct->delete();
+            $invoiceProduct->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('invoice.product_deleted')]);
         } catch (\Exception $e) {

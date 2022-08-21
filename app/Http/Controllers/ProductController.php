@@ -44,7 +44,7 @@ class ProductController extends Controller
         $product->description =  $request->description;
         $product->stock = (int)$request->stock;
         $product->product_number = $request->product_number;
-        $product->price = floatval(str_replace(",", ".", $request->price));
+        $product->price = (float)str_replace(",", ".", $request->price);
         $product->type = $request->type;
 
         if ($request->image) {
@@ -83,7 +83,7 @@ class ProductController extends Controller
         $product->description =  $request->description;
         $product->stock = (int)$request->stock;
         $product->product_number = $request->product_number;
-        $product->price = floatval(str_replace(",", ".", $request->price));
+        $product->price = (float)str_replace(",", ".", $request->price);
         $product->type = $request->type;
 
         if ($request->file('image')) {
