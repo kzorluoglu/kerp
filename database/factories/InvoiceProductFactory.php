@@ -24,11 +24,17 @@ class InvoiceProductFactory extends Factory
      */
     public function definition(): array
     {
+        $productTypes = ['m', 'qm', 'piece', 'hour'];
+        $randomTypeKey = array_rand($productTypes);
+        $price = $this->faker->numberBetween(1, 100);
+        $count = $this->faker->numberBetween(1, 100);
+
         return [
             'title' => $this->faker->words(3, true),
-            'price' => $this->faker->numberBetween(1, 100),
-            'total' => $this->faker->numberBetween(1, 100),
-            'count' => $this->faker->numberBetween(1, 100),
+            'price' => $price,
+            'type' => $productTypes[$randomTypeKey],
+            'count' => $count,
+            'total' => $price * $count,
         ];
     }
 

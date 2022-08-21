@@ -17,7 +17,7 @@ class CompanyTableSeeder extends Seeder
     public function run()
     {
 
-        for($i=1; $i<=6; $i++)
+        for($i=1; $i<=5; $i++)
         {
             DB::table('companies')->insert([
                 'logo' => Str::random(10),
@@ -27,7 +27,7 @@ class CompanyTableSeeder extends Seeder
                 'address' => Str::random(10),
                 'email' => 'mycompany'.$i.'@company.tld',
                 'webpage' => Str::random(10),
-                'currency' => Str::random(10),
+                'currency' => '€',
                 'iban' => Str::random(10),
                 'bic' => Str::random(10),
                 'tax_rate' => 19,

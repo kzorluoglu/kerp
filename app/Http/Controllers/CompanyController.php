@@ -79,8 +79,10 @@ class CompanyController extends Controller
         $company = Company::find($request->input('id'));
         $company->update($request->all());
 
+        $all = $request->all();
+
         if ($request->logo) {
-            Storage::disk('public')->delete($company->image);
+            Storage::disk('public')->delete($company->logo);
             $company->logo = $request->logo->store('images', 'public');
         }
 
