@@ -9,7 +9,9 @@
             <td>
                 <br><br><br>
                 <br><br><br>
-                @if($invoice->company_name)<b>{!! $invoice->company_name !!}</b> <br>@endif
+                @if($invoice->company_name)
+                    <b>{!! $invoice->company_name !!}</b> <br>
+                @endif
                 {!! $invoice->firstname !!}  {!! $invoice->lastname !!}<br>
                 {!! $invoice->street !!}  {!! $invoice->streetnumber !!}<br>
                 {!! $invoice->postcode !!}  {!! $invoice->city !!}<br>
@@ -19,7 +21,7 @@
                 @if($invoice->company->logo)
                     <img src="{{ asset("storage/".$invoice->company->logo) }}" class="company-logo"><br>
 
-                 @endif
+                @endif
                 <b>{!! $invoice->company->company_name !!}</b><br>
                 {!! $invoice->company->email !!}<br>
                 {!! $invoice->company->webpage !!}
