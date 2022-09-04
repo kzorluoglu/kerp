@@ -18,8 +18,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/locale/{id}', 'HomeController@language');
 
-Auth::routes();
-// Auth::routes(['reset' => true, 'verify' => false, 'register' => false]);
+//Auth::routes();
+ Auth::routes(['reset' => true, 'verify' => false, 'register' => false]);
 
 
 Route::middleware('auth')->group(function () {
