@@ -1,0 +1,34 @@
+body {
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
+}
+
+@page {
+    margin: 6mm
+}
+
+.company-logo {
+    max-width:15rem;
+}
+
+.footer {
+    bottom: 0;
+}
+
+.header, .header-space,
+.footer, .footer-space {
+    height: 100px;
+}
+
+.table th, .table td {
+    padding: 0.3rem;
+}
+
+.footer > .table {
+    width:100%;
+}
+
+.footer > .table td {
+    width:50%
+}

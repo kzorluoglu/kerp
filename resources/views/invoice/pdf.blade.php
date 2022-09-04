@@ -1,31 +1,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<style type="text/css">
-    body {
-        font-size: 0.8rem;
-        padding: 0;
-        margin: 0;
-    }
-
-    @page {
-        margin: 6mm
-    }
-
-    .footer {
-        position: fixed;
-        bottom: 0;
-    }
-
-    .header, .header-space,
-    .footer, .footer-space {
-        height: 100px;
-    }
-
-    .table th, .table td {
-        padding: 0.3rem;
-    }
-</style>
+<link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <div class="container-fluid">
     <table class="table table-borderless">
@@ -39,9 +15,9 @@
                 {!! $invoice->postcode !!}  {!! $invoice->city !!}<br>
                 {!! $invoice->country !!}<br>
             </td>
-            <td style="text-align:right">
+            <td class="text-right">
                 @if($invoice->company->logo)
-                    <img src="{{ asset("storage/".$invoice->company->logo) }}" style="max-width:15rem;"><br>
+                    <img src="{{ asset("storage/".$invoice->company->logo) }}" class="company-logo"><br>
 
                  @endif
                 <b>{!! $invoice->company->company_name !!}</b><br>
@@ -53,7 +29,7 @@
             <td>
                 &nbsp;
             </td>
-            <td style="text-align:right">
+            <td class="text-right">
                 <b>{!!__('invoice.invoice_number')!!}</b><br>{!!$invoice->invoice_number!!}<br>
                 <b>{!!__('invoice.date')!!}</b><br>{{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}
             </td>
@@ -128,15 +104,15 @@
     </table>
 </div>
 
-<div class='footer'>
-    <table class="table table-borderless" style="width:100%">
+<div class="footer">
+    <table class="table table-borderless">
         <tr>
-            <td style="width:60%">
+            <td>
                 <b>{!! $invoice->company->company_name !!}</b><br>
                 Inhaber: {!! $invoice->company->firstname !!} {!! $invoice->company->lastname !!}<br>
                 {!! $invoice->company->address !!}<br>
             </td>
-            <td style="width:40%">
+            <td>
                 <b>{!! __("invoice.bank_information") !!}</b><br>
                 <b>{!! __("invoice.bank") !!}</b> {!! $invoice->company->bank !!}<br>
                 <b>{!! __("invoice.iban") !!}</b> {!! $invoice->company->iban !!}<br>
