@@ -41,7 +41,7 @@
             </td>
             <td style="text-align:right">
                 @if($invoice->company->logo)
-                    <img src="{{ public_path("storage/".$invoice->company->logo) }}" style="max-width:15rem;"><br>
+                    <img src="{{ asset("storage/".$invoice->company->logo) }}" style="max-width:15rem;"><br>
 
                  @endif
                 <b>{!! $invoice->company->company_name !!}</b><br>
