@@ -9,7 +9,7 @@ body {
 }
 
 .company-logo {
-    max-width:15rem;
+    max-width: 15rem;
 }
 
 .footer {
@@ -26,9 +26,9 @@ body {
 }
 
 .footer > .table {
-    width:100%;
+    width: 100%;
 }
 
 .footer > .table td {
-    width:50%
+    width: 50%
 }
