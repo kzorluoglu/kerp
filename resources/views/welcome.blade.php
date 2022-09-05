@@ -15,7 +15,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('main.css') }}" rel="stylesheet">
     @show
-    <link rel="stylesheet" href="assets/css/kerp.css">
+    <link rel="stylesheet" href="css/kerp.css">
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
@@ -279,7 +279,7 @@
     <!-- ==================== End Header Area  ========================= -->
 </main>
 <!-- gulp:js -->
-<script src="assets/js/kerp.min.js"></script>
+<script src="js/kerp.min.js"></script>
 <!-- endgulp -->
 </body>
 </html>
