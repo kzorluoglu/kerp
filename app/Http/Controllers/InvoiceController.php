@@ -8,10 +8,8 @@ use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
-use PDF;
-use Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\URL;
 
 
 class InvoiceController extends Controller
@@ -48,13 +46,13 @@ class InvoiceController extends Controller
     public function select()
     {
         $customers = Customer::all();
-        if (!$customers->count())
+        if ($customers->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_customer_founded')]);
         }
 
         $companies = Company::all();
-        if (!$companies->count())
+        if ($companies->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_company_founded')]);
         }
@@ -118,6 +116,7 @@ class InvoiceController extends Controller
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
         $products = Product::all();
+
         return view('invoice.prepare', [
         'invoice' => $invoice,
         'sum_price_total' => $sum_price_total,
@@ -146,7 +145,7 @@ class InvoiceController extends Controller
             return view('invoice.pdf', $data);
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->stream();
+        return Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->stream();
     }
 
     public function download(Request $request)
@@ -170,7 +169,7 @@ class InvoiceController extends Controller
         }
         $pdfName =  Str::slug($pdfName, '-');
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
+        return Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
     }
 
     public function paid($id)

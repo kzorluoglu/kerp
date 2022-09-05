@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Invoice;
 use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
-use PDF;
-use Auth;
-use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class IncomingInvoiceController extends Controller
 {
@@ -47,13 +47,13 @@ class IncomingInvoiceController extends Controller
     public function select()
     {
         $customers = Customer::all();
-        if (!$customers->count())
+        if ($customers->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_customer_founded')]);
         }
 
         $companies = Company::all();
-        if (!$companies->count())
+        if ($companies->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_company_founded')]);
         }
@@ -66,11 +66,11 @@ class IncomingInvoiceController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->customer_id)) {
+        if (empty($request->customer_id) === false) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_customer')]);
         }
 
-        if (empty($request->company_id)) {
+        if (empty($request->company_id) === false) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_company')]);
         }
 
@@ -145,8 +145,8 @@ class IncomingInvoiceController extends Controller
     public function delete($id)
     {
         try {
-            $invoiceProducts = InvoiceProduct::where('invoice_id', $id)->delete();
-            $invoice = Invoice::withoutGlobalScopes()->find($id)->delete();
+            InvoiceProduct::where('invoice_id', $id)->delete();
+            Invoice::withoutGlobalScopes()->find($id)->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.deleted')]);
         } catch (\Exception $e) {
@@ -158,18 +158,18 @@ class IncomingInvoiceController extends Controller
     {
         $invoiceProduct = new InvoiceProduct();
         $invoiceProduct->count = str_replace(',', '.', $request->count);
-        $invoiceProduct->count = floatval($invoiceProduct->count);
+        $invoiceProduct->count = (float)$invoiceProduct->count;
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
 
-        $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
+        $invoiceProduct->total = (float)$invoiceProduct->price * (float)$invoiceProduct->count;
         $invoiceProduct->title = $request->title;
         $invoiceProduct->invoice_id = $request->invoice_id;
         $invoiceProduct->type = $request->type;
 
         try {
-            $status = $invoiceProduct->save();
+            $invoiceProduct->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_added')]);
         } catch (\Exception $e) {
@@ -181,17 +181,17 @@ class IncomingInvoiceController extends Controller
     {
         $invoiceProduct = InvoiceProduct::find($request->id);
         $invoiceProduct->count = str_replace(',', '.', $request->count);
-        $invoiceProduct->count = floatval($invoiceProduct->count);
+        $invoiceProduct->count = (float)$invoiceProduct->count;
 
         $invoiceProduct->price = str_replace('.', '', $request->price);
         $invoiceProduct->price = str_replace(',', '.', $invoiceProduct->price);
 
-        $invoiceProduct->total = floatval($invoiceProduct->price) * floatval($invoiceProduct->count);
+        $invoiceProduct->total = (float)$invoiceProduct->price * $invoiceProduct->count;
         $invoiceProduct->title = $request->title;
         $invoiceProduct->type = $request->type;
 
         try {
-            $status = $invoiceProduct->save();
+            $invoiceProduct->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_updated')]);
         } catch (\Exception $e) {
@@ -204,7 +204,7 @@ class IncomingInvoiceController extends Controller
         $invoiceProduct = InvoiceProduct::find($id);
 
         try {
-            $status = $invoiceProduct->delete();
+            $invoiceProduct->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('incoming_invoice.product_deleted')]);
         } catch (\Exception $e) {
@@ -215,7 +215,7 @@ class IncomingInvoiceController extends Controller
     public function updateInformation(Request $request)
     {
         $invoice = Invoice::withoutGlobalScopes()->find($request->id);
-        $invoice->date = \Carbon\Carbon::parse($request->date)->format('Y-m-d');
+        $invoice->date = Carbon::parse($request->date)->format('Y-m-d');
         $invoice->invoice_number = $request->invoice_number;
         $invoice->tax_rate = $request->tax_rate;
         $invoice->information = $request->information;

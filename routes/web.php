@@ -131,11 +131,11 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('contract')->group(function () {
         Route::get('/', 'ContractController@index')->name('contract');
-        Route::get('new', 'CustomerController@create')->name('contract.new');
-        Route::post('store', 'CustomerController@store')->name('contract.store');
-        Route::get('show/{id}', 'CustomerController@show')->name('contract.show');
-        Route::post('update', 'CustomerController@update')->name('contract.update');
-        Route::get('delete/{id}', 'CustomerController@delete')->name('contract.delete');
+        Route::get('new', 'ContractController@create')->name('contract.new');
+        Route::post('store', 'ContractController@store')->name('contract.store');
+        Route::get('show/{id}', 'ContractController@show')->name('contract.show');
+        Route::post('update', 'ContractController@update')->name('contract.update');
+        Route::get('delete/{id}', 'ContractController@delete')->name('contract.delete');
    });
 
     Route::prefix('overview')->group(function () {

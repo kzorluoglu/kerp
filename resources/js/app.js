@@ -6,8 +6,6 @@
 
 require('./bootstrap');
 
-require('bootstrap-select');
-
 window.Vue = require("vue").default;
 
 window.Vue.use( require('@ckeditor/ckeditor5-vue') );

@@ -10,8 +10,7 @@ use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
-use PDF;
-use Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 
 class OfferController extends Controller
@@ -48,13 +47,13 @@ class OfferController extends Controller
     public function select()
     {
         $customers = Customer::all();
-        if (!$customers->count())
+        if ($customers->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('offer.no_customer_founded')]);
         }
 
         $companies = Company::all();
-        if (!$companies->count())
+        if ($companies->count() === 0)
         {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('offer.no_company_founded')]);
         }
@@ -67,11 +66,11 @@ class OfferController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->customer_id)) {
+        if (empty($request->customer_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('offer.please_select_customer')]);
         }
 
-        if (empty($request->company_id)) {
+        if (empty($request->company_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('offer.please_select_company')]);
         }
 
@@ -148,7 +147,7 @@ class OfferController extends Controller
             return view('offer.pdf', $data);
         }
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('offer.pdf', $data)->stream();
+        return Pdf::setOptions(['isHtml5ParserEnabled' => true])->loadView('offer.pdf', $data)->stream();
     }
 
     public function download(Request $request)
@@ -165,14 +164,14 @@ class OfferController extends Controller
             'sum_tax' => $sum_tax,
             'sum_total' => $sum_total
         ];
-        
+
         $pdfName = $offer->firstname."-".$offer->lastname."-".$offer->offer_number;
         if($offer->company_name){
             $pdfName = $offer->company_name."-".$offer->offer_number;
         }
         $pdfName =  Str::slug($pdfName, '-');
-        
-        return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('offer.pdf', $data)->download($pdfName.".pdf");
+
+        return Pdf::setOptions(['isHtml5ParserEnabled' => true])->loadView('offer.pdf', $data)->download($pdfName.".pdf");
     }
 
     public function changeToInvoice($id)
@@ -190,7 +189,6 @@ class OfferController extends Controller
         $invoice->invoice_number = ($lastInvoice ? $lastInvoice->invoice_number + 1 : 1);
 
         //Set as Default From Company
-        $invoice->information = $offer->information;
         $invoice->firstname = $offer->firstname;
         $invoice->lastname = $offer->lastname;
         $invoice->company_name = $offer->company_name;
@@ -238,8 +236,8 @@ class OfferController extends Controller
     public function delete($id)
     {
         try {
-            $offerProducts = OfferProduct::where('offer_id', $id)->delete();
-            $offer = Offer::find($id)->delete();
+            OfferProduct::where('offer_id', $id)->delete();
+            Offer::find($id)->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.deleted')]);
         } catch (\Exception $e) {
@@ -249,20 +247,19 @@ class OfferController extends Controller
 
     public function saveProduct(Request $request)
     {
-        
         $offerProduct = new OfferProduct;
         $offerProduct->count = str_replace('.', '', $request->count);
         $offerProduct->count = str_replace(',', '.', $offerProduct->count);
 
         $offerProduct->price = str_replace('.', '', $request->price);
         $offerProduct->price = str_replace(',', '.', $offerProduct->price);
-        $offerProduct->total = floatval($offerProduct->price) * floatval($offerProduct->count);
+        $offerProduct->total = (float)$offerProduct->price * (float)$offerProduct->count;
         $offerProduct->title = $request->title;
         $offerProduct->offer_id = $request->offer_id;
         $offerProduct->type = $request->type;
 
         try {
-            $status = $offerProduct->save();
+            $offerProduct->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.product_added')]);
         } catch (\Exception $e) {
@@ -275,15 +272,15 @@ class OfferController extends Controller
         $offerProduct = OfferProduct::find($request->id);
         $offerProduct->count = str_replace('.', '', $request->count);
         $offerProduct->count = str_replace(',', '.', $offerProduct->count);
-        
+
         $offerProduct->price = str_replace('.', '', $request->price);
         $offerProduct->price = str_replace(',', '.', $offerProduct->price);
-        $offerProduct->total = floatval($offerProduct->price) * floatval($offerProduct->count);
+        $offerProduct->total = (float)$offerProduct->price * (float)$offerProduct->count;
         $offerProduct->title = $request->title;
         $offerProduct->type = $request->type;
 
         try {
-            $status = $offerProduct->save();
+            $offerProduct->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.product_updated')]);
         } catch (\Exception $e) {
@@ -296,7 +293,7 @@ class OfferController extends Controller
         $offerProduct = OfferProduct::find($id);
 
         try {
-            $status = $offerProduct->delete();
+            $offerProduct->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.product_deleted')]);
         } catch (\Exception $e) {
@@ -312,12 +309,12 @@ class OfferController extends Controller
         $offer->payment_type = $request->payment_type;
 
         try {
-            $status = $offer->save();
+            $offer->save();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.information_updated')]);
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
     }
- 
+
 }

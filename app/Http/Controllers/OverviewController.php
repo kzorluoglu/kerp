@@ -68,7 +68,6 @@ class OverviewController extends Controller
 
     /**
      * @param Invoice[] $invoices
-     * @return float
      */
     private function getInvoiceTotalSumTax($invoices): float
     {
@@ -84,7 +83,6 @@ class OverviewController extends Controller
 
     /**
      * @param Invoice[] $invoices
-     * @return float
      */
     private function getInvoiceTotalSum($invoices): float
     {
@@ -99,14 +97,10 @@ class OverviewController extends Controller
 
     }
 
-    /**
-     * @return array
-     */
     private function getYears(): array
     {
-        $range = range(date('Y'), 1989);
-        $range2 = range(date('Y'), 1989);
+        $range = range(date('Y'), 2015);
 
-        return array_combine($range, $range2);
+        return array_combine($range, $range);
     }
 }

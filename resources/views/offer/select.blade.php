@@ -22,16 +22,13 @@
                 <div class="card-body">
                     <div class="position-relative form-group">
                         <label for="">{{ __('offer.select_company')}}</label>
-                        <select class="selectpicker" name="company_id" required data-live-search="true">
+                        <select name="company_id" required>
                             <option value="">{{ __('offer.please_select_company') }}</option>
                             @foreach($companies as $company)
-                                <option value="{{$company->id}}">{{$company->company_name}}, {{$company->firstname}}
-                                    , {{$company->lastname}}</option>
+                                <option value="{{$company->id}}" @if ($company->standard) selected @endif>{{$company->company_name}}, {{$company->firstname}} {{$company->lastname}}</option>
                             @endforeach
                         </select>
                     </div>
-                    @foreach($companies as $company)
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -40,11 +37,10 @@
                 <div class="card-body">
                     <div class="position-relative form-group">
                         <label for="">{{ __('offer.select_customer')}}</label>
-                        <select class="selectpicker" name="customer_id" required data-live-search="true">
+                        <select name="customer_id" required>
                             <option value="">{{ __('offer.please_select_customer') }}</option>
                             @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->company_name}}, {{$customer->firstname}}
-                                    , {{$customer->lastname}}</option>
+                                <option value="{{$customer->id}}">{{$customer->company_name}}, {{$customer->firstname}} {{$customer->lastname}}</option>
                             @endforeach
                         </select>
                     </div>
