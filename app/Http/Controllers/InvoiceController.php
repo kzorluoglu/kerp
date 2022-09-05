@@ -11,6 +11,8 @@ use App\Product;
 use PDF;
 use Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+
 
 class InvoiceController extends Controller
 {
@@ -132,7 +134,6 @@ class InvoiceController extends Controller
         $sum_price_total = $invoice->products()->sum('total');
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
-
 
         $data = [
         'invoice' => $invoice,
