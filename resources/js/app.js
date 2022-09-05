@@ -8,7 +8,7 @@ require('./bootstrap');
 
 require('bootstrap-select');
 
-window.Vue = require('vue');
+window.Vue = require("vue").default;
 
 window.Vue.use( require('@ckeditor/ckeditor5-vue') );
 
@@ -51,19 +51,19 @@ $( document ).ready(function() {
     $(".card-shadow-category").addClass('card-shadow-danger');
     $(".text-category").addClass('text-danger');
     $(".bg-category").addClass('bg-danger');
-    
+
     $(".card-shadow-company").addClass('card-shadow-success');
     $(".text-company").addClass('text-success');
     $(".bg-company").addClass('bg-success');
-    
+
     $(".card-shadow-customer").addClass('card-shadow-warning');
     $(".text-customer").addClass('text-warning');
     $(".bg-customer").addClass('bg-warning');
-    
+
     $(".card-shadow-invoice").addClass('card-shadow-info');
     $(".text-invoice").addClass('text-info');
     $(".bg-invoice").addClass('bg-info');
-    
+
     $(".card-shadow-product").addClass('card-shadow-alt');
     $(".text-product").addClass('text-alt');
     $(".bg-product").addClass('bg-alt');
@@ -143,12 +143,7 @@ $( document ).ready(function() {
         $(containerElement).addClass('sidebar-shadow ' + classToSwitch);
     });
 
-    setTimeout(function () {
-        $(".vertical-nav-menu").metisMenu();
-    }, 100);
-
     // Search wrapper trigger
-
     $('.search-icon').click(function () {
         $(this).parent().parent().addClass('active');
     });

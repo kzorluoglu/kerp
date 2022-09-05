@@ -1,7 +1,7 @@
 <template>
    <div>
-        <input :name="inputname" v-model="inputvalue" type="hidden">
-        <ckeditor :editor="editor" v-model="inputvalue" :config="editorConfig"></ckeditor>
+        <input :name="inputName" v-model="inputValue" type="hidden">
+        <ckeditor :editor="editor" v-model="inputValue" :config="editorConfig"></ckeditor>
       </div>
 </template>
 
@@ -16,6 +16,8 @@
        },
         data() {
             return {
+                inputName: this.inputname,
+                inputValue: this.inputvalue,
                 editor: ClassicEditor,
                 editorConfig: {
                     // The configuration of the rich-text editor.
