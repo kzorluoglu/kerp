@@ -108,7 +108,7 @@
                     <div class="col font-weight-bold">{!! __("invoice.add") !!}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <input class="form-control" name="title" id="title0" data-rowid="0" list="productlist"
                                autocomplete="off">
                     </div>
@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="col-3">
+                            <div class="col-12">
                                 <div class="form-group">
                                     {{ Form::text('payment_deadline_day', $invoice->payment_deadline_day, [ 'class' => 'form-control', 'placeholder' => __('invoice.payment_deadline_day_placeholder')] )}}
                                 </div>

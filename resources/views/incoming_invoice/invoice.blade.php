@@ -29,14 +29,14 @@
                                 {!!  Form::open(['route' => ['incoming_invoice.updateinformation']]) !!}
                                 {{ Form::hidden('id', $invoice->id )}}
                                 <div class="form-row">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             {{ Form::text('invoice_number', $invoice->invoice_number !== '0' ? $invoice->invoice_number: "" , [ 'class' => 'form-control', 'placeholder' => __('invoice.invoice_number')] )}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             {{ Form::text('date', \Carbon\Carbon::parse($invoice->date)->format('d.m.Y'), [ 'class' => 'form-control', 'placeholder' => __('invoice.invoice_number')] )}}
                                         </div>
@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             {{ Form::text('payment_deadline_day', $invoice->payment_deadline_day, [ 'class' => 'form-control', 'placeholder' => __('invoice.payment_deadline_day_placeholder')] )}}
                                         </div>
@@ -68,14 +68,14 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             {{ Form::text('payment_type', $invoice->payment_type, [ 'class' => 'form-control', 'placeholder' => __('invoice.payment_type_placeholder')] )}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-3">
+                                    <div class="col-12">
                                         <div class="form-group">
                                             {{ Form::text('tax_rate', $invoice->tax_rate !== '0' ? $invoice->tax_rate: "" , [ 'class' => 'form-control', 'placeholder' => __('invoice.tax_rate')] )}}
                                         </div>
@@ -154,11 +154,11 @@
 
                 {!! Form::open(['route' => ['invoice.saveproduct'], 'id'=>'productform0']) !!}
                 {{ Form::hidden('invoice_id', $invoice->id )}}
-                <div class="row mt-5 mb-3">
+                <div class="row mt-5 ">
                     <div class="col font-weight-bold">{!! __("invoice.add") !!}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <input class="form-control" name="title" id="title0" data-rowid="0" list="productlist"
                                autocomplete="off">
                     </div>
