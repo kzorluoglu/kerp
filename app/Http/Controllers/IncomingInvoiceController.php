@@ -66,11 +66,11 @@ class IncomingInvoiceController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->customer_id) === false) {
+        if (empty($request->customer_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_customer')]);
         }
 
-        if (empty($request->company_id) === false) {
+        if (empty($request->company_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_company')]);
         }
 
