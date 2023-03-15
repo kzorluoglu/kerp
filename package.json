@@ -30,6 +30,6 @@
         "bootstrap-select": "^1.13.12",
         "glob-parent": "^5.1.2",
         "vue-dynamic-select": "^1.0.16",
-        "webpack": "^5.74.0"
+        "webpack": "^5.76.0"
     }
 }
