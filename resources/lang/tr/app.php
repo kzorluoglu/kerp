@@ -3,8 +3,9 @@
 return [
 
     'search' => 'Arama',
-    "filter" => "Filitrele",
-    "select_year" => "Lütfen bir Yil seciniz",
+    "filter" => "Filtrele",
+    "select_year" => "Lütfen bir yıl secin",
+    "select_month" => "Lütfen bir ay seçin",
     'action' => 'İşlem',
     'next' => 'İleri',
     'edit' => 'Düzenle',
@@ -44,5 +45,17 @@ return [
     "dashboard" => 'Dashboard',
     "menu_title1" => 'Başlangıç',
     "menu_title2" => 'Modüller',
-    'close' => 'Kapat'
+    'close' => 'Kapat',
+    'january' => 'Ocak',
+    'february' => 'Şubat',
+    'march' => 'Mart',
+    'april' => 'Nisan',
+    'may' => 'Mayıs',
+    'june' => 'Haziran',
+    'july' => 'Temmuz',
+    'august' => 'Ağustos',
+    'september' => 'Eylül',
+    'october' => 'Ekim',
+    'november' => 'Kasım',
+    'december' => 'Aralık',
 ];

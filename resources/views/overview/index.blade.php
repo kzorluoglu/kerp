@@ -24,6 +24,7 @@
                             id="button-addon1">{{__('app.filter')}}</button>
                 </div>
                 {{ Form::select('year', $years, $selectedYear, ['placeholder' => __('app.select_year')]) }}
+                {{ Form::select('month', $months, $selectedMonth, ['placeholder' => __('app.select_month')]) }}
             </div>
         </div>
     </div>

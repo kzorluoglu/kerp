@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Database\Factories\InvoiceFactory;
+use Database\Factories\IncomingInvoiceFactory;
 use Exception;
 use Illuminate\Database\Seeder;
 
-class InvoiceTableSeeder extends Seeder
+class IncomingInvoiceTableSeeder extends Seeder
 {
     /**
      * Run the database seeders.
@@ -16,7 +16,7 @@ class InvoiceTableSeeder extends Seeder
      */
     public function run()
     {
-        InvoiceFactory::factory()
+        IncomingInvoiceFactory::factory()
             ->count(50)
             ->hasProducts(4)
             ->create();

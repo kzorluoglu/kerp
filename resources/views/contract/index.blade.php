@@ -27,6 +27,7 @@
                             id="button-addon1">{{__('app.search')}}</button>
                 </div>
                 {{ Form::text('search', null, ['class' => 'form-control']) }}
+                {{ Form::close() }}
             </div>
         </div>
     </div>
@@ -35,39 +36,40 @@
         <div class="col-lg-12">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    {{ Form::close() }}
-                    <table class="mb-0 table table-hover">
+                    <table class="table table-striped table-hover">
                         <thead>
                         <tr>
-                            <th width="100" scope="col">#{{__('contract.id')}}</th>
-                            <th scope="col">{{__('contract.title')}}</th>
-                            <th width="150" scope="col">{{__('app.action')}}</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Period Type</th>
+                            <th>Period Value</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(empty($categories))
-                            {{ __('app.not_result')}}
-                        @endif
                         @foreach($contracts as $contract)
                             <tr>
-                                <th scope="row">{{ $contract->id }}</th>
-                                <td>{{ $contract->title }}</td>
+                                <td>{{ $contract->name }}</td>
+                                <td>{{ $contract->company->name }}</td>
+                                <td>{{ $contract->start_date }}</td>
+                                <td>{{ $contract->end_date }}</td>
+                                <td>{{ $contract->period_type }}</td>
+                                <td>{{ $contract->period_value }}</td>
                                 <td>
-                                    <a href="{{ route('contract.show', $contract->id) }}"
-                                       class="mb-2 mr-2 btn btn-light"><i class="metismenu-icon pe-7s-config"></i></a>
-                                    <a class="mb-2 mr-2 btn btn-danger" href="#"
-                                       onclick="event.preventDefault();
-                                           document.getElementById('remove-form{{ $contract->id }}').submit();">
-                                        <i class="metismenu-icon pe-7s-trash"></i>
-                                    </a>
-
-                                    {{ Form::open(['route' => ['contract.delete', $contract->id ], 'method' => 'get', 'id' => 'remove-form'.$contract->id]) }}
-                                    {{ Form::close() }}
+                                    <a href="{{ route('contract.show', $contract->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                    <form action="{{ route('contract.delete', $contract->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this contract?')">Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+
                     {{ $contracts->links() }}
                 </div>
             </div>

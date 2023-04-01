@@ -14,17 +14,28 @@ class CreateContractsTable extends Migration
     public function up()
     {
         Schema::create('contracts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->string('title', 255);
-            $table->datetime('start_date');
-            $table->string('period', 255);
-            $table->enum('period_typ', ['month', 'year']);
-            $table->string('termination', 255);
-            $table->enum('termination_type', ['month', 'year']);
-            $table->string('document', 255)->nullable();
+            $table->id();
+            $table->string('name');
+            $table->text('description');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->unsignedBigInteger('company_id');
+            $table->string('period_type');
+            $table->integer('period_value');
+            $table->string('pdf_document')->nullable();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+        });
+
+        Schema::create('contract_product', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('contract_id');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
+
+            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
@@ -36,5 +47,6 @@ class CreateContractsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contracts');
+        Schema::dropIfExists('contract_product');
     }
 }

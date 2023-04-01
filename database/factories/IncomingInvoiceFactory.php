@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Invoice>
  */
-class InvoiceFactory extends Factory
+class IncomingInvoiceFactory extends Factory
 {
 
     /**
@@ -32,6 +32,7 @@ class InvoiceFactory extends Factory
             'postcode' => $this->faker->numberBetween(1, 100),
             'city' => $this->faker->city,
             'company_id' => $this->faker->numberBetween(1, 5),
+            'incoming_invoice' => 1,
             'date' => $this->faker->dateTimeBetween('-3 years', '+8 months')
         ];
     }

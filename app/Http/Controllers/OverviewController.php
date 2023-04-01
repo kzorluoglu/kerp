@@ -20,20 +20,23 @@ class OverviewController extends Controller
     {
 
         $selectedYear = $request->input('year');
+        $selectedMonth = $request->input('month');
 
-        if (isset($selectedYear)) {
-            $invoices = Invoice::whereYear('date', '=', $selectedYear)->get();
-        } else {
-            $invoices = Invoice::all();
+        $invoicesQuery = Invoice::query();
+        $incomingInvoicesQuery = Invoice::withoutGlobalScopes()->incomingInvoice();
+
+        if ($selectedYear !== null) {
+            $invoicesQuery->whereYear('date', '=', $selectedYear);
+            $incomingInvoicesQuery->whereYear('date', '=', $selectedYear);
         }
 
-        if(isset($selectedYear)) {
-            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->whereYear('date', '=', $selectedYear)->get();
-        }else {
-            $incoming_invoices = Invoice::withoutGlobalScopes()->incomingInvoice()->get();
+        if ($selectedMonth !== null) {
+            $invoicesQuery->whereMonth('date', '=', $selectedMonth);
+            $incomingInvoicesQuery->whereMonth('date', '=', $selectedMonth);
         }
 
-        $years = $this->getYears();
+        $invoices = $invoicesQuery->get();
+        $incoming_invoices = $incomingInvoicesQuery->get();
 
         return view(
             'overview.index',
@@ -46,8 +49,10 @@ class OverviewController extends Controller
                 'incoming_invoicesTotalSumWithoutTax' => $this->getInvoiceTotalSumWithoutTax($incoming_invoices),
                 'incoming_invoicesTotalSumTax' => $this->getInvoiceTotalSumTax($incoming_invoices),
                 'incoming_invoicesTotalSum' => $this->getInvoiceTotalSum($incoming_invoices),
-                'years' => $years,
+                'years' => $this->getYears(),
+                'months' => $this->getMonths(),
                 'selectedYear' => $selectedYear,
+                'selectedMonth' => $selectedMonth,
             ]
         );
     }
@@ -99,14 +104,29 @@ class OverviewController extends Controller
 
     }
 
-    /**
-     * @return array
-     */
     private function getYears(): array
     {
         $range = range(date('Y'), 1989);
         $range2 = range(date('Y'), 1989);
 
         return array_combine($range, $range2);
+    }
+
+    private function getMonths(): array
+    {
+        return [
+            '01' => __('app.january'),
+            '02' => __('app.february'),
+            '03' => __('app.march'),
+            '04' => __('app.april'),
+            '05' => __('app.may'),
+            '06' => __('app.june'),
+            '07' => __('app.july'),
+            '08' => __('app.august'),
+            '09' => __('app.september'),
+            '10' => __('app.october'),
+            '11' => __('app.november'),
+            '12' => __('app.december'),
+        ];
     }
 }
