@@ -39,30 +39,34 @@
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Company</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Period Type</th>
-                            <th>Period Value</th>
-                            <th>Actions</th>
+                            <th>{{ __('contract.name') }}</th>
+                            <th>{{ __('contract.company_name') }}</th>
+                            <th>{{ __('contract.start_date') }}</th>
+                            <th>{{ __('contract.end_date') }} </th>
+                            <th>{{ __('contract.period_type') }} </th>
+                            <th>{{ __('contract.cancellation_date') }}</th>
+                            <th>{{ __('contract.remaining_time') }} </th>
+                            <th>{{ __('contract.renew_remaining_time') }} </th>
+                            <th>{{ __('app.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($contracts as $contract)
                             <tr>
                                 <td>{{ $contract->name }}</td>
-                                <td>{{ $contract->company->name }}</td>
-                                <td>{{ $contract->start_date }}</td>
-                                <td>{{ $contract->end_date }}</td>
-                                <td>{{ $contract->period_type }}</td>
-                                <td>{{ $contract->period_value }}</td>
+                                <td>{{ $contract->company->company_name }}</td>
+                                <td>{{ $contract->start_date->format('d.m.Y H:i:s') }}</td>
+                                <td>{{ $contract->end_date->format('d.m.Y H:i:s') }}</td>
+                                <td>{{ $contract->period_value }} {{ __('app.'.$contract->period_type) }}</td>
+                                <td>{{ $contract->cancellation_date ? $contract->cancellation_date->format('d.m.Y') : '' }}</td>
+                                <td>{{ $contract->remainingTimeText() }}</td>
+                                <td>{{ $contract->renewRemainingTimeText() }}</td>
                                 <td>
                                     <a href="{{ route('contract.show', $contract->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <form action="{{ route('contract.delete', $contract->id) }}" method="POST" class="d-inline">
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this contract?')">Delete</button>
+                                        @method('GET')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ __('app.delete_confirm_question') }}')">Delete</button>
                                     </form>
                                 </td>
                             </tr>

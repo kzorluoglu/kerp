@@ -20,7 +20,6 @@ class ContractFactory extends Factory
      */
     public function definition(): array
     {
-        $periodTypes = ['year', 'month'];
         $company = Company::inRandomOrder()->first();
 
         return [
@@ -28,11 +27,11 @@ class ContractFactory extends Factory
             'description' => 'test',
             'start_date' => $this->faker->dateTimeBetween('-1 year'),
             'end_date' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'period_type' => $this->faker->randomElement($periodTypes),
+            'period_type' => $this->faker->randomElement(Contract::$periodTypes),
             'period_value' => $this->faker->numberBetween(1, 12),
-            'pdf_document' => null,
+            'cancellation_period_type' => $this->faker->randomElement(Contract::$periodTypes),
+            'cancellation_period_value' => $this->faker->numberBetween(1, 12),
             'company_id' => $company->id,
-
         ];
     }
 

@@ -58,4 +58,12 @@ return [
     'october' => 'October',
     'november' => 'November',
     'december' => 'December',
+    'year'  => 'Yearly',
+    'month' => 'Monthly',
+    'week'  => 'Weekly',
+    'day'   => 'Daily',
+    'months' => 'months',
+    'days' => 'days',
+    'years' => 'years',
+    'delete_confirm_question' => 'Are you sure you want to delete this?',
 ];

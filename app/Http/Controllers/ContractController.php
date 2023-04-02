@@ -51,14 +51,12 @@ class ContractController extends Controller
 
     public function store(Request $request)
     {
-        $contract = new Contract();
-        $contract->name = $request->input('name');
-        $contract->description = $request->input('description');
-        $contract->start_date = $request->input('start_date');
-        $contract->end_date = $request->input('end_date');
-        $contract->company_id = $request->input('company_id');
-        $contract->period_type = $request->input('period_type');
-        $contract->period_value = $request->input('period_value');
+        $contract = new Contract($request->all());
+        $contract->calculateEndDate();
+        $contract->calculateCancellationDate();
+
+        $contract->save();
+
         if ($request->hasFile('pdf_document')) {
             $pdf = $request->file('pdf_document');
             $filename = time() . '_' . $pdf->getClientOriginalName();
@@ -94,6 +92,9 @@ class ContractController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'period_type' => 'required|string',
             'period_value' => 'required|integer',
+            'cancellation_period_type' => 'required',
+            'cancellation_period_value' => 'required|integer',
+            'cancellation_date' => 'nullable|date|before:end_date',
             'company_id' => 'required|exists:companies,id',
             'product_ids' => 'nullable|array',
             'product_ids.*' => 'nullable|exists:products,id'
@@ -102,10 +103,15 @@ class ContractController extends Controller
         $contract->name = $validatedData['name'];
         $contract->description = $validatedData['description'];
         $contract->start_date = $validatedData['start_date'];
-        $contract->end_date = $validatedData['end_date'];
         $contract->period_type = $validatedData['period_type'];
         $contract->period_value = $validatedData['period_value'];
+        $contract->cancellation_period_type = $validatedData['cancellation_period_type'];
+        $contract->cancellation_period_value = $validatedData['cancellation_period_value'];
+        $contract->cancellation_date = $validatedData['cancellation_date'];
         $contract->company_id = $validatedData['company_id'];
+
+        $contract->calculateEndDate();
+        $contract->calculateCancellationDate();
 
         $contract->products()->sync($validatedData['product_ids'] ?? []);
 
@@ -119,6 +125,18 @@ class ContractController extends Controller
         $contract->save();
 
         return redirect()->route('contract')->with('success', 'Contract updated successfully.');
+    }
+
+    public function delete(Contract $contract)
+    {
+        // Remove associated products
+        $contract->products()->detach();
+
+        // Delete the contract
+        $contract->delete();
+
+        return redirect()->route('contract')
+            ->with('success', 'Contract deleted successfully');
     }
 
 }

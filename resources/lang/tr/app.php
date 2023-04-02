@@ -58,4 +58,12 @@ return [
     'october' => 'Ekim',
     'november' => 'Kasım',
     'december' => 'Aralık',
+    'year'  => 'Yıllık',
+    'month' => 'Aylık',
+    'week'  => 'Haftalık',
+    'day'   => 'Günlük',
+    'months' => 'ay',
+    'days' => 'gün',
+    'years' => 'yıl',
+    'delete_confirm_question' => 'Bu öğeyi silmek istediğinizden emin misiniz?',
 ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Contract;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,8 +21,11 @@ class CreateContractsTable extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->unsignedBigInteger('company_id');
-            $table->string('period_type');
+            $table->enum('period_type', Contract::$periodTypes);
             $table->integer('period_value');
+            $table->enum('cancellation_period_type', Contract::$periodTypes);
+            $table->integer('cancellation_period_value');
+            $table->date('cancellation_date')->nullable();
             $table->string('pdf_document')->nullable();
             $table->timestamps();
 
