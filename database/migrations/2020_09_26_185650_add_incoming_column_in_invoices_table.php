@@ -13,10 +13,13 @@ class AddIncomingColumnInInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::table('invoices', function (Blueprint $table) {
-                $table->boolean('incoming_invoice')->default(false);
-            }
-        );
+        if (Schema::hasColumn('invoices', 'incoming_invoice') === false)
+        {
+            Schema::table('invoices', function (Blueprint $table) {
+                    $table->boolean('incoming_invoice')->default(false);
+                }
+            );
+        }
     }
 
     /**
@@ -26,7 +29,8 @@ class AddIncomingColumnInInvoicesTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('invoices', 'incoming_invoice')) {
+        if (Schema::hasColumn('invoices', 'incoming_invoice'))
+        {
             Schema::table('invoices', function (Blueprint $table) {
                     $table->dropColumn('incoming_invoice');
                 }
