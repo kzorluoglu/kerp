@@ -92,7 +92,7 @@ class ContractController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'period_type' => 'required|string',
             'period_value' => 'required|integer',
-            'cancellation_period_type' => 'required',
+            'cancellation_period_type' => 'required|string',
             'cancellation_period_value' => 'required|integer',
             'cancellation_date' => 'nullable|date|before:end_date',
             'company_id' => 'required|exists:companies,id',
