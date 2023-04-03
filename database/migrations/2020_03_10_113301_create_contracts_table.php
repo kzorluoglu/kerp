@@ -31,16 +31,6 @@ class CreateContractsTable extends Migration
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
-
-        Schema::create('contract_product', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('contract_id');
-            $table->unsignedBigInteger('product_id');
-            $table->timestamps();
-
-            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-        });
     }
 
     /**
@@ -51,6 +41,5 @@ class CreateContractsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contracts');
-        Schema::dropIfExists('contract_product');
     }
 }
