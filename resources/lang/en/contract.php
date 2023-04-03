@@ -4,6 +4,7 @@ return [
     'page_title' => 'Contracts',
     'page_description' => 'Here you can update or create your contracts.',
     'new_contract' => 'New Contract',
+    'form_title' => 'Adding/Editing Contracts',
     'name' => 'Name',
     'description' => 'Description',
     'company_name' => 'Company Name',

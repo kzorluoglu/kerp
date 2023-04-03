@@ -4,6 +4,7 @@ return [
     'page_title' => 'Sözleşmeler',
     'page_description' => 'Burada sözleşmelerinizi güncelleyebilir veya oluşturabilirsiniz.',
     'new_contract' => 'Yeni̇ Sözleşme',
+    'form_title' => 'Sözleşme ekleme/düzenleme',
     'name' => 'İsim',
     'description' => 'Açıklama',
     'company_name' => 'Firma Adı',
