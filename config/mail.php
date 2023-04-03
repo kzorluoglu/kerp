@@ -44,6 +44,8 @@ return [
 
     'port' => env('MAIL_PORT', 587),
 
+    'admin_address' => env('ADMIN_ADDRESS',  null),
+
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address

@@ -122,21 +122,25 @@ class ContractController extends Controller
             $contract->pdf_document = $pdfName;
         }
 
-        $contract->save();
+        $contract->updateOrFail();
 
         return redirect()->route('contract')->with('success', 'Contract updated successfully.');
     }
 
-    public function delete(Contract $contract)
+    public function delete($id)
     {
+        $contract = Contract::find($id);
+
         // Remove associated products
         $contract->products()->detach();
 
         // Delete the contract
         $contract->delete();
 
-        return redirect()->route('contract')
-            ->with('success', 'Contract deleted successfully');
+        return redirect()->route('contract')->with([
+            'type' => 'success',
+            'message' => __('app.success_deleted'),
+        ]);
     }
 
 }

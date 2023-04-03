@@ -15,6 +15,7 @@ return [
     'cancellation_date' => 'İptal Tarihi',
     'cancellation_period_type' => 'İptal Süre Tipi',
     'cancellation_period_value' => 'İptal Süresi',
-    'renew_remaining_time' => 'Yenileme/Kalan Süre',
+    'remaining_time' => 'Bitişe Kalan Süre',
+    'renew_remaining_time' => 'Yenilemeye kalan Süre',
     'pdf_document' => 'PDF Belgesi',
 ];

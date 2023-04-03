@@ -2,6 +2,6 @@
 
 @section('content')
 
-    @include('contract.form', ['route' => 'company.store'])
+    @include('contract.form')
 
 @endsection

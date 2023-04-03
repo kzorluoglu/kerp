@@ -20,7 +20,7 @@ class Contract extends Model
         'cancellation_period_value',
         'pdf_document',
     ];
-    public static $periodTypes = [
+    public static array $periodTypes = [
         'year',
         'month',
         'week',

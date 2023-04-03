@@ -31,6 +31,8 @@ class SendCancellationNotification extends Command
             $message .= "- " . $contract->name . " (" . $contract->company_name . ")\n";
         }
 
+        var_dump($message);
+
         // Send email to system admin
         $to = config('mail.admin_address');
         $subject = "Contracts with Cancellation Date Less Than 30 Days Away";

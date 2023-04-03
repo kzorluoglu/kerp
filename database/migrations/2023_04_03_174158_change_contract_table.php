@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('invoice_products', function (Blueprint $table) {
+        Schema::table('contracts', function (Blueprint $table) {
             $table->text('description')->nullable()->change();
         });
     }

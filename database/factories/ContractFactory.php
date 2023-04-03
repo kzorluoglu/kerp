@@ -31,6 +31,7 @@ class ContractFactory extends Factory
             'period_value' => $this->faker->numberBetween(1, 12),
             'cancellation_period_type' => $this->faker->randomElement(Contract::$periodTypes),
             'cancellation_period_value' => $this->faker->numberBetween(1, 12),
+            'cancellation_date' => $this->faker->dateTimeBetween('now', '+2 months'),
             'company_id' => $company->id,
         ];
     }

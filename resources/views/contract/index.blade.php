@@ -58,17 +58,20 @@
                                 <td>{{ $contract->start_date->format('d.m.Y H:i:s') }}</td>
                                 <td>{{ $contract->end_date->format('d.m.Y H:i:s') }}</td>
                                 <td>{{ $contract->period_value }} {{ __('app.'.$contract->period_type) }}</td>
-                                <td>{{ $contract->cancellation_date ? $contract->cancellation_date->format('d.m.Y') : '' }}</td>
+                                <td>{{ $contract->cancellation_date->format('d.m.Y H:i:s') }}</td>
                                 <td>{{ $contract->remainingTimeText() }}</td>
                                 <td>{{ $contract->renewRemainingTimeText() }}</td>
                                 <td>
-                                    <a href="{{ route('contract.show', $contract->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                    <form action="{{ route('contract.delete', $contract->id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('GET')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('{{ __('app.delete_confirm_question') }}')">Delete</button>
-                                    </form>
-                                </td>
+                                    <a href="{{ route('contract.show', $contract->id) }}" class="mb-2 mr-2 btn btn-light"><i
+                                            class="metismenu-icon pe-7s-config"></i>
+                                    </a>
+                                    <button type="submit" class="mb-2 mr-2 btn btn-danger" onclick="event.preventDefault();
+                                       document.getElementById('delete-form{{ $contract->id }}').submit();">
+                                        <i class="metismenu-icon pe-7s-trash"></i>
+                                    </button>
+                                    {{ Form::open(['route' => ['contract.delete', $contract->id ], 'method' => 'get', 'id' => 'delete-form'.$contract->id]) }}
+                                    {{ Form::close() }}
+                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
