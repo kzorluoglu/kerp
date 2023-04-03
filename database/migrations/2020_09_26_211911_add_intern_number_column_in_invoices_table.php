@@ -13,9 +13,11 @@ class AddInternNumberColumnInInvoicesTable extends Migration
      */
     public function up()
     {
-        Schema::table('invoices', function (Blueprint $table) {
-            $table->string('intern_invoice_number', 255)->nullable();
-        });
+        if (Schema::hasColumn('invoices', 'intern_invoice_number') === false) {
+            Schema::table('invoices', function (Blueprint $table) {
+                $table->string('intern_invoice_number', 255)->nullable();
+            });
+        }
     }
 
     /**
