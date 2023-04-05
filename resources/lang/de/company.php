@@ -21,7 +21,7 @@ return [
     'bic' => 'BIC',
     'bic_help' => 'SKLODEXXXX',
     'tax_rate' => 'Steuersatz',
-    'tax_rate_help' => '19 oder 0',
+    'tax_rate_help' => '19, 18, 0 usw.',
     'tax_rate_0_information' => '
         Vergessen Sie nicht, eine Informationsnachricht zu verfassen,
         dass im Feld mit den "Rechnung Information" kein Steuersatz angegeben ist.

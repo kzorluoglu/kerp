@@ -38,7 +38,9 @@
                 </div>
                 <div class="position-relative form-group">
                     {{  Form::label('customer.tax_rate', __('customer.tax_rate')) }}
-                    {{  Form::text('tax_rate', null, ['class' => 'form-control']) }}
+                    {{  Form::text('tax_rate', $defaultTaxRate, ['class' => 'form-control']) }}
+                    <small id="tax_rate" class="form-text text-muted">{{ __('app.required_input') }}
+                        , {{ __('company.tax_rate_help') }}</small>
                 </div>
             </div>
         </div>

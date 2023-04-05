@@ -21,7 +21,7 @@ return [
     'bic' => 'BIC',
     'bic_help' => 'SKLODEXXXX',
     'tax_rate' => 'Tax Rate',
-    'tax_rate_help' => '18, 19 or 0',
+    'tax_rate_help' => '18, 19 or 0 etc.',
 
     "page_title" => "COMPANIES",
     "form_title" => "Add/Edit Company",

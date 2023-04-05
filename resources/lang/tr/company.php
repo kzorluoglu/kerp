@@ -21,9 +21,9 @@ return [
     'bic' => 'BIC',
     'bic_help' => 'SKLODEXXXX',
     'tax_rate' => 'Vergi Oranı',
-    'tax_rate_help' => '18, 19 yada 0',
+    'tax_rate_help' => '18, 19 yada 0 gibi',
 
-        
+
     "page_title" => "FİRMALARIM",
     "form_title" => "Firme Ekleme / Düzenleme",
     "page_description" => "Hesabınıza ait firmaları buradan görebilir, değiştirebilir veya ekleyebilirsiniz",

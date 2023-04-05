@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use Illuminate\Http\Request;
 use App\Customer;
 
@@ -34,8 +35,11 @@ class CustomerController extends Controller
     {
         $customer = new Customer();
 
+        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate;
+
         return view('customer.create', [
             'customer' => $customer,
+            'defaultTaxRate' => $defaultTaxRate,
         ]);
     }
 
