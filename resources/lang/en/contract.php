@@ -18,4 +18,13 @@ return [
     'remaining_time' => 'Remaining Time',
     'renew_remaining_time' => 'Renew Remaining Time',
     'pdf_document' => 'PDF Document',
+    'created' => 'Contract created successfully.',
+    'updated' => 'Contract updated successfully.',
+    'deleted' => 'Contract deleted.',
+    'cronjob' => [
+        'mail' => [
+            'header' => 'The following contracts have a cancellation date less than 30 days away:\n',
+            'subject' => 'Contracts with Cancellation Date Less Than 30 Days Away',
+        ]
+    ]
 ];

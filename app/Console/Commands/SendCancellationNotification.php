@@ -26,14 +26,14 @@ class SendCancellationNotification extends Command
         }
 
         // Prepare email message
-        $message = "The following contracts have a cancellation date less than 30 days away:\n";
+        $message = __('contract.cronjob.mail.message');
         foreach ($contracts as $contract) {
-            $message .= "- " . $contract->name . " (" . $contract->company_name . ")\n";
+            $message .= sprintf('%s (%s) : %s\n', $contract->name, $contract->company->company_name, $contract->renewRemainingTimeText());
         }
 
         // Send email to system admin
         $to = config('mail.admin_address');
-        $subject = "Contracts with Cancellation Date Less Than 30 Days Away";
+        $subject = __('contract.cronjob.mail.subject');
         Mail::raw($message, function($email) use ($to, $subject) {
             $email->to($to);
             $email->subject($subject);

@@ -15,7 +15,6 @@
             <div class="card-body">
                 <form method="POST" action="{{ isset($contract->id) ? route('contract.update', $contract->id) : route('contract.store') }}">
                     @csrf
-
                     <div class="form-group">
                         <label for="name">{{ __('contract.name') }}:</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ old('name', isset($contract) ? $contract->name : '') }}">

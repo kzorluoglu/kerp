@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Company;
 use App\Contract;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,16 +23,23 @@ class ContractFactory extends Factory
     {
         $company = Company::inRandomOrder()->first();
 
+        $startDate = Carbon::now()->addMonths($this->faker->numberBetween(1, 3));
+        $endDate = Carbon::now()->addMonths($this->faker->numberBetween(4, 50));
+        $periodType = 'month';
+        $periodValue = $this->faker->numberBetween(2, 3);
+
+        $cancellationDate = clone $endDate;
+        $cancellationDate->subMonths($this->faker->numberBetween(2, 3));
+
         return [
             'name' => $this->faker->name,
-            'description' => 'test',
-            'start_date' => $this->faker->dateTimeBetween('-1 year'),
-            'end_date' => $this->faker->dateTimeBetween('now', '+1 year'),
-            'period_type' => $this->faker->randomElement(Contract::$periodTypes),
-            'period_value' => $this->faker->numberBetween(1, 12),
-            'cancellation_period_type' => $this->faker->randomElement(Contract::$periodTypes),
-            'cancellation_period_value' => $this->faker->numberBetween(1, 12),
-            'cancellation_date' => $this->faker->dateTimeBetween('now', '+2 months'),
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'period_type' => 'year',
+            'period_value' => $this->faker->numberBetween(1, 3),
+            'cancellation_period_type' => $periodType,
+            'cancellation_period_value' => $periodValue,
+            'cancellation_date' => $cancellationDate,
             'company_id' => $company->id,
         ];
     }

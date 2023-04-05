@@ -165,13 +165,13 @@ class OfferController extends Controller
             'sum_tax' => $sum_tax,
             'sum_total' => $sum_total
         ];
-        
+
         $pdfName = $offer->firstname."-".$offer->lastname."-".$offer->offer_number;
         if($offer->company_name){
             $pdfName = $offer->company_name."-".$offer->offer_number;
         }
         $pdfName =  Str::slug($pdfName, '-');
-        
+
         return PDF::setOptions(['isHtml5ParserEnabled' => true])->loadView('offer.pdf', $data)->download($pdfName.".pdf");
     }
 
@@ -238,8 +238,7 @@ class OfferController extends Controller
     public function delete($id)
     {
         try {
-            $offerProducts = OfferProduct::where('offer_id', $id)->delete();
-            $offer = Offer::find($id)->delete();
+            OfferProduct::where('offer_id', $id)->delete();
 
             return redirect()->back()->with(['type' => 'success', 'message' => __('offer.deleted')]);
         } catch (\Exception $e) {
@@ -249,7 +248,7 @@ class OfferController extends Controller
 
     public function saveProduct(Request $request)
     {
-        
+
         $offerProduct = new OfferProduct;
         $offerProduct->count = str_replace('.', '', $request->count);
         $offerProduct->count = str_replace(',', '.', $offerProduct->count);
@@ -275,7 +274,7 @@ class OfferController extends Controller
         $offerProduct = OfferProduct::find($request->id);
         $offerProduct->count = str_replace('.', '', $request->count);
         $offerProduct->count = str_replace(',', '.', $offerProduct->count);
-        
+
         $offerProduct->price = str_replace('.', '', $request->price);
         $offerProduct->price = str_replace(',', '.', $offerProduct->price);
         $offerProduct->total = floatval($offerProduct->price) * floatval($offerProduct->count);
@@ -319,5 +318,5 @@ class OfferController extends Controller
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
     }
- 
+
 }

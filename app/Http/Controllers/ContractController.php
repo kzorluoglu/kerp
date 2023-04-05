@@ -12,7 +12,7 @@ class ContractController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $contracts = Contract::with(['products', 'company'])->orderByDesc('created_at');
+        $contracts = Contract::with(['products', 'company'])->orderBy('cancellation_date');
 
         if ($search) {
             $contracts->where(function($query) use ($search) {
@@ -63,15 +63,18 @@ class ContractController extends Controller
             $pdf->move(public_path('pdf'), $filename);
             $contract->pdf_document = $filename;
         }
-        $contract->save();
 
         $products = $request->input('products', []);
         $contract->products()->attach($products);
 
-        return redirect()->route('contract')->with([
-            'type' => 'success',
-            'message' => __('contracts.added'),
-        ]);
+        try {
+            $contract->save();
+            return redirect()->route('contract')->with(['type' => 'success', 'message' => __('contract.created')]);
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
+        }
+
     }
 
     public function show($id)
@@ -83,7 +86,7 @@ class ContractController extends Controller
         return view('contract.show', compact('contract', 'companies', 'products'));
     }
 
-    public function update(Request $request, Contract $contract)
+    public function update(Request $request, int $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -100,6 +103,7 @@ class ContractController extends Controller
             'product_ids.*' => 'nullable|exists:products,id'
         ]);
 
+        $contract = Contract::findOrFail($id);
         $contract->name = $validatedData['name'];
         $contract->description = $validatedData['description'];
         $contract->start_date = $validatedData['start_date'];
@@ -107,7 +111,6 @@ class ContractController extends Controller
         $contract->period_value = $validatedData['period_value'];
         $contract->cancellation_period_type = $validatedData['cancellation_period_type'];
         $contract->cancellation_period_value = $validatedData['cancellation_period_value'];
-        $contract->cancellation_date = $validatedData['cancellation_date'];
         $contract->company_id = $validatedData['company_id'];
 
         $contract->calculateEndDate();
@@ -122,9 +125,14 @@ class ContractController extends Controller
             $contract->pdf_document = $pdfName;
         }
 
-        $contract->updateOrFail();
+        try {
+            $contract->save();
+            return redirect()->back()->with(['type' => 'success', 'message' => __('contract.updated')]);
 
-        return redirect()->route('contract')->with('success', 'Contract updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
+        }
+
     }
 
     public function delete($id)
@@ -134,13 +142,13 @@ class ContractController extends Controller
         // Remove associated products
         $contract->products()->detach();
 
-        // Delete the contract
-        $contract->delete();
+        try {
+            $contract->delete();
+            return redirect()->route('contract')->with(['type' => 'success', 'message' => __('contract.deleted')]);
 
-        return redirect()->route('contract')->with([
-            'type' => 'success',
-            'message' => __('app.success_deleted'),
-        ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
+        }
     }
 
 }

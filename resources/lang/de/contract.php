@@ -19,4 +19,13 @@ return [
     'remaining_time' => 'Restzeit',
     'renew_remaining_time' => 'Verlängerung Restzeit',
     'pdf_document' => 'PDF-Dokument',
+    'created' => 'Vertrag erfolgreich erstellt.',
+    'updated' => 'Vertrag erfolgreich aktualisiert.',
+    'deleted' => 'Vertrag gelöscht.',
+    'cronjob' => [
+        'mail' => [
+            'header' => 'Folgende Verträge haben ein Kündigungsdatum, das weniger als 30 Tage entfernt ist:\n',
+            'subject' => 'Verträge mit Kündigungsdatum weniger als 30 Tage entfernt',
+            ]
+    ]
 ];

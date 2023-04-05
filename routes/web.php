@@ -134,8 +134,10 @@ Route::middleware('auth')->group(function () {
         Route::get('new', 'ContractController@create')->name('contract.new');
         Route::post('store', 'ContractController@store')->name('contract.store');
         Route::get('show/{id}', 'ContractController@show')->name('contract.show');
-        Route::post('update', 'ContractController@update')->name('contract.update');
+        Route::post('update/{id}', 'ContractController@update')->name('contract.update');
         Route::get('delete/{id}', 'ContractController@delete')->name('contract.delete');
+
+
    });
 
     Route::prefix('overview')->group(function () {

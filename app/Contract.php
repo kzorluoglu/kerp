@@ -18,6 +18,7 @@ class Contract extends Model
         'period_value',
         'cancellation_period_type',
         'cancellation_period_value',
+        'cancellation_date',
         'pdf_document',
     ];
     public static array $periodTypes = [
@@ -106,11 +107,7 @@ class Contract extends Model
         return $this->generateRemainingTimeText($time);
     }
 
-    /**
-     * @param $time
-     * @return string
-     */
-    public function generateRemainingTimeText($time): string
+    public function generateRemainingTimeText(\DateInterval $time): ?string
     {
         $remainingTimeText = '';
         $timeParts = [

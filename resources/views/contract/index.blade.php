@@ -55,10 +55,10 @@
                             <tr>
                                 <td>{{ $contract->name }}</td>
                                 <td>{{ $contract->company->company_name }}</td>
-                                <td>{{ $contract->start_date->format('d.m.Y H:i:s') }}</td>
-                                <td>{{ $contract->end_date->format('d.m.Y H:i:s') }}</td>
+                                <td>{{ $contract->start_date->format('d.m.Y h:m:s') }}</td>
+                                <td>{{ $contract->end_date->format('d.m.Y h:m:s') }}</td>
                                 <td>{{ $contract->period_value }} {{ __('app.'.$contract->period_type) }}</td>
-                                <td>{{ $contract->cancellation_date->format('d.m.Y H:i:s') }}</td>
+                                <td>{{ $contract->cancellation_date->format('d.m.Y h:m:s') }}</td>
                                 <td>{{ $contract->remainingTimeText() }}</td>
                                 <td>{{ $contract->renewRemainingTimeText() }}</td>
                                 <td>
