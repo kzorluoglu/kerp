@@ -15,17 +15,23 @@ Open Source Simple Invoice and Offer Tool with Customers and Companies.
    - Intern Number per Invoice
    - Pad <-> Unpoad Option
    - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
- - Invoices
+ - **Invoices**
    - Paid <-> Unpaid Option
    - PDF Download and Preview Option
    - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
- - Offers
+ - **Offers**
    - Create Invoice from Offer
    - PDF Download and Preview Option
    - Autocomplete Product with All Information (Price, Count, Title, Product Typ)
- - Customers
+ - **Customers**
    - Tax Information
- - Companies (Your Companies)
+- **Contracts**
+  - Add/remove Monthly, Annual, Weekly, Daily Contracts
+  - Displaying the remaining time
+  - Automatic calculate and display of the expiration time
+  -  Automatic calculate and displa date of the last contract cancellation submission
+  - Contract Cancellation Notify via Cronjob, when is less than one month away.
+ - **Companies (Your Companies)**
    - Bank Information
    - Invoice Information Section
 
@@ -136,7 +142,15 @@ Start the local development server
 
     Auth::routes(); // replace this line with under..
     Auth::routes(['reset' => true, 'verify' => false, 'register' => false]); // Register Disabled
-    
+
+**Cronjob**
+
+You can add this command to your crontab file to run automatically at a specified interval, like every day at midnight. For example, to run the command every day at midnight, add the following line to your crontab file:
+
+`
+0 0 * * * php /path/to/artisan send-cancellation-notification
+`
+
 ## Licence
 
 MIT
