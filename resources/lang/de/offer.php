@@ -2,19 +2,12 @@
 
 return [
     'new_invoice' => 'Neue Angebot',
-    'select_customer' => 'Ein Kunde Auswählen',
-    'select_company' => 'Eine Firma Auswählen',
-    'select_customer_information' => 'Suche nach Vorname, Nachname, Firma, Straße, Postleitzahl, Stadt, E-Mail',
-    'no_customer_founded' => 'Bitte legen sie mindesten ein Kunde an.',
-    'please_select_customer' => 'Bitte wählen Sie ein Kunde ein.',
-    'please_select_company' => 'Bitte wählen Sie eine Firma ein.',
-    'no_company_founded' => 'Bitte legen sie mindesten ein Firma an.',
     'offer_number' => 'Angebotsnummer',
     'date' => 'Datum',
     'product_title' => 'Artikel',
     'product_price' => 'Preis',
     'product_type' => 'Einheit',
-    'product_count' => 'Stück',  
+    'product_count' => 'Stück',
     'firstname' => 'Vorname',
     'lastname' => 'Nachname',
     'company_name' => 'Firma',
@@ -37,11 +30,11 @@ return [
     'product_updated' => 'Produkt wurde aktualisiert.',
     'product_deleted' => 'Produkt wurde gelöscht.',
     'deleted' => 'Rechnung wurde gelöscht.',
-    
+
     "page_title" => "ANGEBOTEN",
     "form_title" => "Angebote hinzufügen / bearbeiten",
     "page_description" => "Hier können Sie Ihre Angebote aktualisieren oder anlegen.",
-        
+
     "hasinvoice" => "Rechnung Erstellt",
     "changetoinvoice" => "Rechnung aus Angebot Erstellen",
     "invoice_before_created" => "Dieses Angebot hat Rechnung. <br>Rechnungsnummer <b>:invoice_number</b>",

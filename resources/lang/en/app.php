@@ -66,4 +66,13 @@ return [
     'days' => 'days',
     'years' => 'years',
     'delete_confirm_question' => 'Are you sure you want to delete this?',
+    'select_customer' => 'Select Customer',
+    'select_customer_with_autocomplete' => 'Select Customer with Autocomplete',
+    'select_company' => 'Select Company',
+    'select_company_with_autocomplete' => 'Select Company  with Autocomplete',
+    'select_customer_information' => 'Search by Firstname, Lastname, Company, Street, Postcode, City, E-mail',
+    'no_customer_founded' => 'You must have at least 1 customer.',
+    'please_select_customer' => 'Please select a Customer',
+    'please_select_company' => 'Please select a Company',
+    'no_company_founded' => 'You must have at least 1 company.',
 ];

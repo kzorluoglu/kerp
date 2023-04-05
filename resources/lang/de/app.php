@@ -66,5 +66,13 @@ return [
     'days' => 'Tage',
     'years' => 'Jahre',
     'delete_confirm_question' => 'Sind Sie sicher, dass Sie dies löschen möchten?',
-
+    'select_customer' => 'Ein Kunde Auswählen',
+    'select_customer_with_autocomplete' => 'Ein Kunde mit Autovervollständigung Auswählen',
+    'select_company' => 'Eine Firma Auswählen',
+    'select_company_with_autocomplete' => 'Eine Firma mit Autovervollständigung Auswählen',
+    'select_customer_information' => 'Suche nach Vorname, Nachname, Firma, Straße, Postleitzahl, Stadt, E-Mail',
+    'no_customer_founded' => 'Bitte legen sie mindesten ein Kunde an.',
+    'please_select_customer' => 'Bitte wählen Sie ein Kunde ein.',
+    'please_select_company' => 'Bitte wählen Sie eine Firma ein.',
+    'no_company_founded' => 'Bitte legen sie mindesten ein Firma an.',
 ];

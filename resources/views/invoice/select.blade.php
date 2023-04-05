@@ -19,17 +19,9 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="position-relative form-group">
-                        <label for="">{{ __('invoice.select_company')}}</label>
-                        <select class="selectpicker" name="company_id" required data-live-search="true">
-                            <option value="">{{ __('invoice.please_select_company') }}</option>
-                            @foreach($companies as $company)
-                                <option value="{{$company->id}}">{{$company->company_name}}, {{$company->firstname}}
-                                    , {{$company->lastname}}</option>
-                            @endforeach
-                        </select>
+                        <label for="">{{ __('app.select_company')}}</label>
+                        <autocomplete-company placeholder="{{ __('app.select_company_with_autocomplete')}}"></autocomplete-company>
                     </div>
-                    @foreach($companies as $company)
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -37,14 +29,8 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <div class="position-relative form-group">
-                        <label for="">{{ __('invoice.select_customer')}}</label>
-                        <select class="selectpicker" name="customer_id" required data-live-search="true">
-                            <option value="">{{ __('invoice.please_select_customer') }}</option>
-                            @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->company_name}}, {{$customer->firstname}}
-                                    , {{$customer->lastname}}</option>
-                            @endforeach
-                        </select>
+                        <label for="">{{ __('app.select_customer')}}</label>
+                        <autocomplete-customer placeholder="{{ __('app.select_customer_with_autocomplete')}}"></autocomplete-customer>
                     </div>
                 </div>
             </div>

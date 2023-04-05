@@ -2,13 +2,6 @@
 
 return [
     'new_invoice' => 'New Invoice',
-    'select_customer' => 'Select Customer',
-    'select_customer_information' => 'Search by Firstname, Lastname, Company, Street, Postcode, City, E-mail',
-    'no_customer_founded' => 'You must have at least 1 customer.',
-    'please_select_customer' => 'Please select a Customer',
-    'please_select_company' => 'Please select a Company',
-    'select_company' => 'Select Company',
-    'no_company_founded' => 'You must have at least 1 company.',
     'invoice_number' => 'Invoice Nr.',
     'date' => 'Date',
     'product_title' => 'Product Title',

@@ -2,13 +2,7 @@
 
 return [
     'new_invoice' => 'Yeni Fatura',
-    'select_customer' => 'Müşteri seçiniz',
-    'select_customer_information' => 'Ad, Soyad, Şirket, Cadde, Posta kodu, Şehir, E-postaya ile arama yapabilirsiniz',
-    'no_customer_founded' => 'En az 1 Tane Müsteriye sahip olmalısınız.',
-    'please_select_customer' => 'Lütfen bir müşteri seçiniz',
-    'please_select_company' => 'Lütfen firmanızı seçiniz',
-    'select_company' => 'Firma seçiniz',
-    'no_company_founded' => 'En az 1 Tane Firmaya sahip olmalısınız.',
+
     'invoice_number' => 'Fatura No',
     'date' => 'Tarih',
     'product_title' => 'Ürün',

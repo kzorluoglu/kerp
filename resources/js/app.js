@@ -24,8 +24,8 @@ window.$ = require('jquery');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('autocomplete-invoicecompany', require('./components/Autocomplete/InvoiceCompany.vue').default);
-// Vue.component('autocomplete-invoicecustomer', require('./components/Autocomplete/InvoiceCustomer.vue').default);
+Vue.component('autocomplete-company', require('./components/Autocomplete/Company.vue').default);
+Vue.component('autocomplete-customer', require('./components/Autocomplete/Customer.vue').default);
 // Vue.component('autocomplete-invoiceproduct', require('./components/Autocomplete/InvoiceProduct.vue').default);
 Vue.component('texteditor', require('./components/TextEditor.vue').default);
 

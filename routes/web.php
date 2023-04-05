@@ -78,12 +78,13 @@ Route::middleware('auth')->group(function () {
 
        Route::post('updateinformation', 'InvoiceController@updateInformation')->name('invoice.updateinformation');
 
-       Route::get('/autocomplete/invoicecompany', 'InvoiceController@autocompleteInvoiceCompany');
-       Route::get('/autocomplete/invoicecustomer', 'InvoiceController@autocompleteInvoiceCustomer');
-       Route::get('/autocomplete/invoiceproduct', 'InvoiceController@autocompleteProduct');
-
        Route::get('paid/{id}', 'InvoiceController@paid')->name('invoice.paid');
   });
+
+
+    Route::post('/autocomplete/company', 'AutocompleteController@getCompany');
+    Route::post('/autocomplete/customer', 'AutocompleteController@getCustomer');
+    Route::post('/autocomplete/product', 'InvoiceController@getProduct');
 
     Route::prefix('incoming_invoice')->group(function () {
         Route::get('/', 'IncomingInvoiceController@index')->name('incoming_invoice');
