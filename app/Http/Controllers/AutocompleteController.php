@@ -17,7 +17,7 @@ class AutocompleteController extends Controller
         }
 
         $search = $data['search'];
-        $result = Company::where('company', 'like', '%'.$search.'%')
+        $result = Company::where('company_name', 'like', '%'.$search.'%')
             ->orWhere('firstname', 'like', '%'.$search.'%')
             ->orWhere('lastname', 'like', '%'.$search.'%')
             ->orWhere('address', 'like', '%'.$search.'%')
@@ -38,7 +38,7 @@ class AutocompleteController extends Controller
         }
 
         $search = $data['search'];
-        $result = Customer::where('company', 'like', '%'.$search.'%')
+        $result = Customer::where('company_name', 'like', '%'.$search.'%')
             ->orWhere('firstname', 'like', '%'.$search.'%')
             ->orWhere('lastname', 'like', '%'.$search.'%')
             ->orWhere('address', 'like', '%'.$search.'%')

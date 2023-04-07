@@ -35,7 +35,7 @@ class CustomerController extends Controller
     {
         $customer = new Customer();
 
-        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate;
+        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate ?? 0;
 
         return view('customer.create', [
             'customer' => $customer,
@@ -65,9 +65,11 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::find($id);
+        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate ?? 0;
 
         return view('customer.show', [
             'customer' => $customer,
+            'defaultTaxRate' => $defaultTaxRate,
         ]);
     }
 

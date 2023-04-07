@@ -34,9 +34,11 @@ class CompanyController extends Controller
     public function create()
     {
         $company = new Company();
+        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate ?? 0;
 
         return view('company.create', [
-              'company' => $company,
+            'company' => $company,
+            'defaultTaxRate' => $defaultTaxRate,
           ]);
     }
 
@@ -67,9 +69,11 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::find($id);
+        $defaultTaxRate = Company::where('standard', true)->first()->tax_rate ?? 0;
 
         return view('company.show', [
-              'company' => $company,
+            'company' => $company,
+            'defaultTaxRate' => $defaultTaxRate,
           ]);
     }
 

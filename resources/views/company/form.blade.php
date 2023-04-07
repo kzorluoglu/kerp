@@ -93,7 +93,7 @@
                 </div>
                 <div class="position-relative form-group">
                     {{  Form::label('tax_rate',  __('company.tax_rate')) }}
-                    {{  Form::text('tax_rate', null, ['class' => 'form-control', 'required' => 'required']) }}
+                    {{  Form::text('tax_rate', $defaultTaxRate, ['class' => 'form-control', 'required' => 'required']) }}
                     <small id="tax_rate" class="form-text text-muted">{{ __('app.required_input') }}
                         , {{ __('company.tax_rate_help') }}</small>
                     @if($company->tax_rate == 0)
