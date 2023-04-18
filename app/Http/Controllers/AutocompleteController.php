@@ -41,9 +41,7 @@ class AutocompleteController extends Controller
         $result = Customer::where('company_name', 'like', '%'.$search.'%')
             ->orWhere('firstname', 'like', '%'.$search.'%')
             ->orWhere('lastname', 'like', '%'.$search.'%')
-            ->orWhere('address', 'like', '%'.$search.'%')
             ->orWhere('email', 'like', '%'.$search.'%')
-            ->orWhere('webpage', 'like', '%'.$search.'%')
             ->get();
 
         return json_encode($result);
