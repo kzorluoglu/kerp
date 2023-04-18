@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Http\Request;
 use App\Customer;
 
@@ -54,10 +55,13 @@ class CustomerController extends Controller
                 'type' => 'success',
                 'message' => __('app.success_added'),
             ]);
-        } catch (\Exception $e) {
+        } catch (QueryException|\Exception  $e) {
+
+            $message = $this->getQueryExceptionMessageByErrorCode($e);
+
             return redirect()->back()->with([
                 'type' => 'danger',
-                'message' => $e->getMessage(),
+                'message' => $message,
             ]);
         }
     }
@@ -110,5 +114,19 @@ class CustomerController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    private function getQueryExceptionMessageByErrorCode(QueryException|\Exception $e)
+    {
+        $errorCode = $e->errorInfo[1];
+
+        return match ($errorCode) {
+            1062 => __('The email address entered already exists.'),
+            1048 => __('One or more required fields are missing.'),
+            1054 => __('One or more columns specified in the query do not exist.'),
+            1146 => __('The requested table does not exist.'),
+            1452 => __('One or more foreign key values do not exist.'),
+            default => __('An error occurred while processing the request.'),
+        };
     }
 }
