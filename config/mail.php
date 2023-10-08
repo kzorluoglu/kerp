@@ -44,7 +44,7 @@ return [
 
     'port' => env('MAIL_PORT', 587),
 
-    'admin_address' => env('ADMIN_ADDRESS',  null),
+    'admin_address' => env('MAIL_ADMIN_ADDRESS',  null),
 
     /*
     |--------------------------------------------------------------------------

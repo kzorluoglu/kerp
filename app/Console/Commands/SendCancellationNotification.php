@@ -16,7 +16,7 @@ class SendCancellationNotification extends Command
     public function handle()
     {
         // Get all contracts with cancellation date less than 30 days away
-        $contracts = Contract::where('cancellation_date', '<', Carbon::now()->addDays(30))
+        $contracts = Contract::where('cancellation_date', '<', Carbon::now()->addDays(30))->orderBy('cancellation_date')
             ->get();
 
         // Check if there are any contracts to notify about
