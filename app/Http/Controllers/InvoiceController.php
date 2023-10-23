@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Invoice;
 use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
-use PDF;
-use Auth;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\URL;
 
 
 class InvoiceController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
 
         $search = $request->input('search');
@@ -25,37 +24,35 @@ class InvoiceController extends Controller
         $invoices = Invoice::orderByRaw($orderRaw)->paginate(15);
 
         if ($search) {
-            $invoices = Invoice::where('invoice_number', 'like', '%'.$search.'%')
-          ->orWhere('firstname', 'like', '%'.$search.'%')
-          ->orWhere('lastname', 'like', '%'.$search.'%')
-          ->orWhere('company_name', 'like', '%'.$search.'%')
-          ->orWhere('street', 'like', '%'.$search.'%')
-          ->orWhere('streetnumber', 'like', '%'.$search.'%')
-          ->orWhere('postcode', 'like', '%'.$search.'%')
-          ->orWhere('city', 'like', '%'.$search.'%')
-          ->orWhere('country', 'like', '%'.$search.'%')
-          ->orWhere('total_price', 'like', '%'.$search.'%')
-          ->orWhere('tax_rate', 'like', '%'.$search.'%')
-          ->paginate(15);
+            $invoices = Invoice::where('invoice_number', 'like', '%' . $search . '%')
+                ->orWhere('firstname', 'like', '%' . $search . '%')
+                ->orWhere('lastname', 'like', '%' . $search . '%')
+                ->orWhere('company_name', 'like', '%' . $search . '%')
+                ->orWhere('street', 'like', '%' . $search . '%')
+                ->orWhere('streetnumber', 'like', '%' . $search . '%')
+                ->orWhere('postcode', 'like', '%' . $search . '%')
+                ->orWhere('city', 'like', '%' . $search . '%')
+                ->orWhere('country', 'like', '%' . $search . '%')
+                ->orWhere('total_price', 'like', '%' . $search . '%')
+                ->orWhere('tax_rate', 'like', '%' . $search . '%')
+                ->paginate(15);
         }
 
         return view('invoice.index', [
-          'invoices' => $invoices,
-          'search' => $search,
-      ]);
+            'invoices' => $invoices,
+            'search' => $search,
+        ]);
     }
 
-    public function select()
+    public function select(): \Illuminate\Http\RedirectResponse|View
     {
         $customers = Customer::all();
-        if (!$customers->count())
-        {
+        if (!$customers->count()) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_customer_founded')]);
         }
 
         $companies = Company::all();
-        if (!$companies->count())
-        {
+        if (!$companies->count()) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.no_company_founded')]);
         }
 
@@ -67,11 +64,11 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->customer_id)) {
+        if (empty($request->customer_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_customer')]);
         }
 
-        if (empty($request->company_id)) {
+        if (empty($request->company_id) === true) {
             return redirect()->back()->with(['type' => 'danger', 'message' => __('invoice.please_select_company')]);
         }
 
@@ -118,13 +115,14 @@ class InvoiceController extends Controller
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
         $products = Product::all();
+
         return view('invoice.prepare', [
-        'invoice' => $invoice,
-        'sum_price_total' => $sum_price_total,
-        'sum_tax' => $sum_tax,
-        'sum_total' => $sum_total,
-        'products' => $products
-      ]);
+            'invoice' => $invoice,
+            'sum_price_total' => $sum_price_total,
+            'sum_tax' => $sum_tax,
+            'sum_total' => $sum_total,
+            'products' => $products
+        ]);
     }
 
     public function pdf($invoice_id, Request $request)
@@ -136,11 +134,11 @@ class InvoiceController extends Controller
         $sum_total = $sum_price_total + $sum_tax;
 
         $data = [
-        'invoice' => $invoice,
-        'sum_price_total' => $sum_price_total,
-        'sum_tax' => $sum_tax,
-        'sum_total' => $sum_total,
-      ];
+            'invoice' => $invoice,
+            'sum_price_total' => $sum_price_total,
+            'sum_tax' => $sum_tax,
+            'sum_total' => $sum_total,
+        ];
 
         if ($request->input('debug')) {
             return view('invoice.pdf', $data);
@@ -164,13 +162,13 @@ class InvoiceController extends Controller
             'sum_total' => $sum_total
         ];
 
-        $pdfName = $invoice->firstname."-".$invoice->lastname."-".$invoice->invoice_number;
-        if($invoice->company_name){
-            $pdfName = $invoice->company_name."-".$invoice->invoice_number;
+        $pdfName = $invoice->firstname . "-" . $invoice->lastname . "-" . $invoice->invoice_number;
+        if ($invoice->company_name) {
+            $pdfName = $invoice->company_name . "-" . $invoice->invoice_number;
         }
-        $pdfName =  Str::slug($pdfName, '-');
+        $pdfName = Str::slug($pdfName, '-');
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName.".pdf");
+        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName . ".pdf");
     }
 
     public function paid($id)
@@ -179,7 +177,7 @@ class InvoiceController extends Controller
         $invoice->paid = !$invoice->paid;
         $invoice->paid_date = null;
 
-        if($invoice->paid){
+        if ($invoice->paid) {
             $now = new \DateTime();
             $invoice->paid_date = $now->format('Y-m-d h:m:s');
         }
@@ -187,7 +185,7 @@ class InvoiceController extends Controller
         try {
             $invoice->save();
             $message = __('invoice.remove_paid', ['invoice_number' => $invoice->invoice_number]);
-            if($invoice->paid){
+            if ($invoice->paid) {
                 $message = __('invoice.set_paid', ['invoice_number' => $invoice->invoice_number]);
             }
             return redirect()->back()->with(['type' => 'success', 'message' => $message]);

@@ -49,7 +49,7 @@
         @if($invoice->products)
             @foreach($invoice->products as $product)
                 <tr>
-                    <td class="w-40">{{ $product->title }}</td>
+                    <td cla ss="w-40 product-title-cell">{{ $product->title }}</td>
                     <td class="w-20 text-center">
                         {{number_format($product->price, 2, ',', '.')}} {!! $invoice->company->currency !!}
                     </td>
@@ -104,23 +104,24 @@
             </tr>
         @endif
     </table>
+
+    <div class="footer">
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <b>{!! $invoice->company->company_name !!}</b><br>
+                    Inhaber: {!! $invoice->company->firstname !!} {!! $invoice->company->lastname !!}<br>
+                    {!! $invoice->company->address !!}<br>
+                </td>
+                <td>
+                    <b>{!! __("invoice.bank_information") !!}</b><br>
+                    <b>{!! __("invoice.bank") !!}</b> {!! $invoice->company->bank !!}<br>
+                    <b>{!! __("invoice.iban") !!}</b> {!! $invoice->company->iban !!}<br>
+                    <b>{!! __("invoice.bic") !!}</b> {!! $invoice->company->bic !!}
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<div class="footer">
-    <table class="table table-borderless">
-        <tr>
-            <td>
-                <b>{!! $invoice->company->company_name !!}</b><br>
-                Inhaber: {!! $invoice->company->firstname !!} {!! $invoice->company->lastname !!}<br>
-                {!! $invoice->company->address !!}<br>
-            </td>
-            <td>
-                <b>{!! __("invoice.bank_information") !!}</b><br>
-                <b>{!! __("invoice.bank") !!}</b> {!! $invoice->company->bank !!}<br>
-                <b>{!! __("invoice.iban") !!}</b> {!! $invoice->company->iban !!}<br>
-                <b>{!! __("invoice.bic") !!}</b> {!! $invoice->company->bic !!}
-            </td>
-        </tr>
-    </table>
-</div>
 </html>
