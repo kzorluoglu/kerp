@@ -19,8 +19,7 @@
             </td>
             <td class="text-right">
                 @if($invoice->company->logo)
-                    <img src="{{ asset("storage/".$invoice->company->logo) }}" class="company-logo"><br>
-
+                    <img src="{{ Storage::url($invoice->company->logo, 'public')}}" style="max-width:15rem;">
                 @endif
                 <b>{!! $invoice->company->company_name !!}</b><br>
                 {!! $invoice->company->email !!}<br>

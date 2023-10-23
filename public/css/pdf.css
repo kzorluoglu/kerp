@@ -32,6 +32,10 @@ body {
     height: 100px;
 }
 
+.table {
+    table-layout: fixed;
+}
+
 .table th, .table td {
     padding: 0.3rem;
 }

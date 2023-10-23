@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Invoice;
@@ -10,6 +9,8 @@ use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 
@@ -140,11 +141,7 @@ class InvoiceController extends Controller
             'sum_total' => $sum_total,
         ];
 
-        if ($request->input('debug')) {
-            return view('invoice.pdf', $data);
-        }
-
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->stream();
+        return view('invoice.pdf', $data);
     }
 
     public function download(Request $request)
@@ -168,7 +165,7 @@ class InvoiceController extends Controller
         }
         $pdfName = Str::slug($pdfName, '-');
 
-        return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.pdf', $data)->download($pdfName . ".pdf");
+        return view('invoice.pdf', $data);
     }
 
     public function paid($id)
