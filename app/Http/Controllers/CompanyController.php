@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use App\Company;
 
 class CompanyController extends Controller
@@ -110,7 +110,7 @@ class CompanyController extends Controller
 
         try {
             $company = Company::find($id);
-            Storage::disk('public')->delete($company->image);
+            Storage::disk('public')->delete($company->logo);
             $company->delete();
 
             return redirect()->back()->with([

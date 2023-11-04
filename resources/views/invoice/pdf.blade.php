@@ -1,13 +1,92 @@
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="{{ asset('css/pdf.css') }}" rel="stylesheet">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Invoice</title>
+    <style>
+        @page {
+            margin: 20mm 10mm 20mm 10mm;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .container-fluid {
+            width: 190mm;
+            max-width: 190mm;
+            padding-left: 0;
+            padding-right: 0;
+            margin: auto;
+        }
+        .company-logo {
+            max-width: 15rem;
+        }
+        .footer {
+            bottom: 0;
+        }
+        .header, .header-space,
+        .footer, .footer-space {
+            height: 100px;
+        }
+        .table {
+            table-layout: fixed;
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        .table th {
+            text-align: inherit;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .text-right {
+            text-align: right !important;
+        }
+        .text-center {
+            text-align: center !important;
+        }
+        .w-20, .w-40 {
+            width: 20%; /* Adjust as necessary */
+        }
+        .p-1 {
+            padding: 0.25rem !important;
+        }
+        @media print {
+            table {
+                page-break-inside: auto;
+            }
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            thead {
+                display: table-header-group;
+            }
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+        .product-title-cell {
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+    </style>
+ </head>
+<body>
 <div class="container-fluid">
     <table class="table table-borderless">
         <tr>
-            <td>
-                <br><br><br>
+            <td colspan="2">
                 <br><br><br>
                 @if($invoice->company_name)
                     <b>{!! $invoice->company_name !!}</b> <br>
@@ -18,24 +97,23 @@
                 {!! $invoice->country !!}<br>
             </td>
             <td class="text-right">
-                @if($invoice->company->logo)
-                    <img src="{{ Storage::url($invoice->company->logo, 'public')}}" style="max-width:15rem;">
-                @endif
+                    @if($invoice->company->logo)
+                    <img src="{{ $company_logo }}" class="company-logo" alt="company-logo">
+                    @endif
                 <b>{!! $invoice->company->company_name !!}</b><br>
                 {!! $invoice->company->email !!}<br>
                 {!! $invoice->company->webpage !!}
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 &nbsp;
             </td>
             <td class="text-right">
-                <b>{!!__('invoice.invoice_number')!!}</b><br>{!!$invoice->invoice_number!!}<br>
-                <b>{!!__('invoice.date')!!}</b><br>{{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}
+                <b>{!! __('invoice.invoice_number') !!}</b><br>{!!$invoice->invoice_number!!}<br>
+                <b>{!! __('invoice.date')!!}</b><br>{{ \Carbon\Carbon::parse($invoice->date)->format('d.m.Y')}}
             </td>
         </tr>
-
     </table>
     <table class="table table-striped">
         <thead>
@@ -48,7 +126,7 @@
         @if($invoice->products)
             @foreach($invoice->products as $product)
                 <tr>
-                    <td cla ss="w-40 product-title-cell">{{ $product->title }}</td>
+                    <td class="w-40 product-title-cell">{{ $product->title }}</td>
                     <td class="w-20 text-center">
                         {{number_format($product->price, 2, ',', '.')}} {!! $invoice->company->currency !!}
                     </td>
@@ -87,7 +165,6 @@
                 {!! $invoice->information !!}
             </td>
         </tr>
-        </tr>
         @if($invoice->payment_deadline_day)
             <tr>
                 <td colspan="4">
@@ -103,7 +180,6 @@
             </tr>
         @endif
     </table>
-
     <div class="footer">
         <table class="table table-borderless">
             <tr>
@@ -122,5 +198,5 @@
         </table>
     </div>
 </div>
-
+</body>
 </html>

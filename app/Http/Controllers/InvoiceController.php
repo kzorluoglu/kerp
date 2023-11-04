@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Invoice;
@@ -9,8 +10,7 @@ use App\InvoiceProduct;
 use App\Customer;
 use App\Company;
 use App\Product;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -134,14 +134,31 @@ class InvoiceController extends Controller
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
 
-        $data = [
+         $data = [
             'invoice' => $invoice,
             'sum_price_total' => $sum_price_total,
             'sum_tax' => $sum_tax,
             'sum_total' => $sum_total,
         ];
 
-        return view('invoice.pdf', $data);
+        $pdfName = $invoice->firstname . "-" . $invoice->lastname . "-" . $invoice->invoice_number;
+        $pdfName = Str::slug($pdfName, '-');
+
+        $imagePath = public_path() . Storage::url($invoice->company->logo);
+        $data['company_logo'] = $this->imageToBase64($imagePath);
+
+        $pdf = PDF::loadView('invoice.pdf', $data)  // Load the view file and data into DomPDF
+        ->setHttpContext(stream_context_create([
+            'ssl' => [
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ],
+        ]))
+        ->setPaper('a4', 'portrait')  // Set the paper size to A
+        ->setOptions(['isHtml5ParserEnabled' => true, 'isPhpEnabled' => true, 'isRemoteEnabled' => true])
+        ->setWarnings(true);
+
+        return $pdf->stream($pdfName . '.pdf');  // Stream the PDF to the browser
     }
 
     public function download(Request $request)
@@ -165,7 +182,9 @@ class InvoiceController extends Controller
         }
         $pdfName = Str::slug($pdfName, '-');
 
-        return view('invoice.pdf', $data);
+        $pdf = PDF::loadView('invoice.pdf', $data);
+
+        return $pdf->download($pdfName . '.pdf');
     }
 
     public function paid($id)
@@ -274,6 +293,14 @@ class InvoiceController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with(['type' => 'danger', 'message' => $e->getMessage()]);
         }
+    }
+
+    private function imageToBase64(string $imagePath): string
+    {
+        $type = pathinfo($imagePath, PATHINFO_EXTENSION);
+        $data = file_get_contents($imagePath);
+
+        return 'data:image/' . $type . ';base64,' . base64_encode($data);
     }
 
 }

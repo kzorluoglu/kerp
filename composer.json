@@ -11,6 +11,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^2.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "innocenzi/laravel-vite": "0.2.*",
