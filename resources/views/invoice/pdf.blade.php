@@ -6,10 +6,11 @@
     <title>Invoice</title>
     <style>
         @page {
-            margin: 20mm 10mm 20mm 10mm;
+            margin: 10mm 10mm 10mm 10mm;
         }
         body {
             font-family: 'Arial', sans-serif;
+            font-size: 12px;
             margin: 0;
             padding: 0;
             width: 100%;
@@ -38,10 +39,12 @@
             color: #212529;
             border-collapse: collapse;
         }
+        .product-table th, .product-table td {
+            border-top: 1px solid #dee2e6;
+        }
         .table th, .table td {
             padding: 0.75rem;
             vertical-align: top;
-            border-top: 1px solid #dee2e6;
         }
         .table th {
             text-align: inherit;
@@ -55,8 +58,35 @@
         .text-center {
             text-align: center !important;
         }
-        .w-20, .w-40 {
+        .w-10 {
+            width: 10%; /* Adjust as necessary */
+        }
+        .w-20 {
             width: 20%; /* Adjust as necessary */
+        }
+        .w-30 {
+            width: 30%; /* Adjust as necessary */
+        }
+        .w-40 {
+            width: 40%; /* Adjust as necessary */
+        }
+        .w-50 {
+            width: 50%; /* Adjust as necessary */
+        }
+        .w-60 {
+            width: 60%; /* Adjust as necessary */
+        }
+        .w-70 {
+            width: 70%; /* Adjust as necessary */
+        }
+        .w-80 {
+            width: 80%; /* Adjust as necessary */
+        }
+        .w-90 {
+            width: 90%; /* Adjust as necessary */
+        }
+        .w-100 {
+            width: 100%; /* Adjust as necessary */
         }
         .p-1 {
             padding: 0.25rem !important;
@@ -115,11 +145,11 @@
             </td>
         </tr>
     </table>
-    <table class="table table-striped">
+    <table class="table table-striped product-table">
         <thead>
-        <th class="w-40">{!! __('invoice.product_title') !!}</th>
-        <th class="w-20 text-center">{!! __('invoice.product_price') !!}</th>
-        <th class="w-20 text-center">{!! __('invoice.product_count') !!} - {!! __('invoice.product_type') !!}</th>
+        <th class="w-60">{!! __('invoice.product_title') !!}</th>
+        <th class="w-10 text-center">{!! __('invoice.product_price') !!}</th>
+        <th class="w-10 text-center">{!! __('invoice.product_count') !!} - {!! __('invoice.product_type') !!}</th>
         <th class="w-20 text-right">{!! __('invoice.product_total_price') !!}</th>
         </thead>
         <tbody>
