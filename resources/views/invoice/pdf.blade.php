@@ -113,6 +113,17 @@
     </style>
  </head>
 <body>
+<script type="text/php">
+    if (isset($pdf)) {
+        $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+        $size = 10;
+        $pageText = $PAGE_COUNT . " / " . $PAGE_COUNT;
+        $y = 820; // Adjust value to set the distance from the bottom
+        $x = 306 - ($fontMetrics->getTextWidth($pageText, $font, $size) / 2);
+        $pdf->page_text($x, $y, $pageText, $font, $size);
+    }
+</script>
+
 <div class="container-fluid">
     <table class="table table-borderless">
         <tr>
