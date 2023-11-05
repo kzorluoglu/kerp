@@ -178,12 +178,14 @@ class InvoiceController extends Controller
         return Str::slug($pdfName, '-');
     }
 
-    private function generatePdf($data)
+    /**
+     * @throws \Exception
+     */
+    private function generatePdf($data): \Barryvdh\DomPDF\PDF
     {
         $pdf = PDF::loadView('invoice.pdf', $data);
 
-        $pdf->setPaper('a4', 'portrait')
-            ->setOptions(['isHtml5ParserEnabled' => true])
+        $pdf->setOption('isHtml5ParserEnabled', true)
             ->render();
 
         $dompdf = $pdf->getDomPDF();
