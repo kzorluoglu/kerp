@@ -16,33 +16,34 @@ use Illuminate\Support\Str;
 
 class InvoiceController extends Controller
 {
+
     public function index(Request $request): View
     {
-
-        $search = $request->input('search');
-
-        $orderRaw = "CAST(invoice_number AS UNSIGNED) DESC";
-        $invoices = Invoice::orderByRaw($orderRaw)->paginate(15);
-
-        if ($search) {
-            $invoices = Invoice::where('invoice_number', 'like', '%' . $search . '%')
-                ->orWhere('firstname', 'like', '%' . $search . '%')
-                ->orWhere('lastname', 'like', '%' . $search . '%')
-                ->orWhere('company_name', 'like', '%' . $search . '%')
-                ->orWhere('street', 'like', '%' . $search . '%')
-                ->orWhere('streetnumber', 'like', '%' . $search . '%')
-                ->orWhere('postcode', 'like', '%' . $search . '%')
-                ->orWhere('city', 'like', '%' . $search . '%')
-                ->orWhere('country', 'like', '%' . $search . '%')
-                ->orWhere('total_price', 'like', '%' . $search . '%')
-                ->orWhere('tax_rate', 'like', '%' . $search . '%')
-                ->paginate(15);
-        }
-
+        $invoices = $this->getInvoices($request->input('search'));
         return view('invoice.index', [
             'invoices' => $invoices,
-            'search' => $search,
+            'search' => $request->input('search'),
         ]);
+    }
+
+    private function getInvoices(?string $search)
+    {
+        if (!$search) {
+            return Invoice::orderByRaw("CAST(invoice_number AS UNSIGNED) DESC")->paginate(15);
+        }
+
+        return Invoice::where('invoice_number', 'like', '%' . $search . '%')
+            ->orWhere('firstname', 'like', '%' . $search . '%')
+            ->orWhere('lastname', 'like', '%' . $search . '%')
+            ->orWhere('company_name', 'like', '%' . $search . '%')
+            ->orWhere('street', 'like', '%' . $search . '%')
+            ->orWhere('streetnumber', 'like', '%' . $search . '%')
+            ->orWhere('postcode', 'like', '%' . $search . '%')
+            ->orWhere('city', 'like', '%' . $search . '%')
+            ->orWhere('country', 'like', '%' . $search . '%')
+            ->orWhere('total_price', 'like', '%' . $search . '%')
+            ->orWhere('tax_rate', 'like', '%' . $search . '%')
+            ->paginate(15);
     }
 
     public function select(): \Illuminate\Http\RedirectResponse|View
@@ -126,65 +127,70 @@ class InvoiceController extends Controller
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function pdf($invoice_id, Request $request)
     {
         $invoice = Invoice::find($invoice_id);
+        $pdfName = $this->getPdfName($invoice);
+        $data = $this->getInvoiceData($invoice);
 
-        $sum_price_total = $invoice->products()->sum('total');
-        $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
-        $sum_total = $sum_price_total + $sum_tax;
+        $pdf = $this->generatePdf($data);
 
-         $data = [
-            'invoice' => $invoice,
-            'sum_price_total' => $sum_price_total,
-            'sum_tax' => $sum_tax,
-            'sum_total' => $sum_total,
-        ];
-
-        $pdfName = $invoice->firstname . "-" . $invoice->lastname . "-" . $invoice->invoice_number;
-        $pdfName = Str::slug($pdfName, '-');
-
-        $imagePath = public_path() . Storage::url($invoice->company->logo);
-        $data['company_logo'] = $this->imageToBase64($imagePath);
-
-        $pdf = PDF::loadView('invoice.pdf', $data)  // Load the view file and data into DomPDF
-        ->setHttpContext(stream_context_create([
-            'ssl' => [
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ],
-        ]))
-        ->setPaper('a4', 'portrait')  // Set the paper size to A
-        ->setOptions(['isHtml5ParserEnabled' => true, 'isPhpEnabled' => true, 'isRemoteEnabled' => true])
-        ->setWarnings(true);
-
-        return $pdf->stream($pdfName . '.pdf');  // Stream the PDF to the browser
+        return $pdf->stream($pdfName . '.pdf');
     }
 
     public function download(Request $request)
     {
         $invoice = Invoice::find($request->id);
+        $pdfName = $this->getPdfName($invoice);
+        $data = $this->getInvoiceData($invoice);
 
+        $pdf = $this->generatePdf($data);
+
+        return $pdf->download($pdfName . '.pdf');
+    }
+
+    private function getInvoiceData($invoice)
+    {
         $sum_price_total = $invoice->products()->sum('total');
         $sum_tax = round(($sum_price_total * $invoice->tax_rate) / 100, 2);
         $sum_total = $sum_price_total + $sum_tax;
 
-        $data = [
+        $imagePath = public_path() . Storage::url($invoice->company->logo);
+
+        return [
             'invoice' => $invoice,
             'sum_price_total' => $sum_price_total,
             'sum_tax' => $sum_tax,
-            'sum_total' => $sum_total
+            'sum_total' => $sum_total,
+            'company_logo' => $this->imageToBase64($imagePath)
         ];
+    }
 
+    private function getPdfName($invoice)
+    {
         $pdfName = $invoice->firstname . "-" . $invoice->lastname . "-" . $invoice->invoice_number;
         if ($invoice->company_name) {
             $pdfName = $invoice->company_name . "-" . $invoice->invoice_number;
         }
-        $pdfName = Str::slug($pdfName, '-');
+        return Str::slug($pdfName, '-');
+    }
 
+    private function generatePdf($data)
+    {
         $pdf = PDF::loadView('invoice.pdf', $data);
 
-        return $pdf->download($pdfName . '.pdf');
+        $pdf->setPaper('a4', 'portrait')
+            ->setOptions(['isHtml5ParserEnabled' => true])
+            ->render();
+
+        $dompdf = $pdf->getDomPDF();
+        $font = $dompdf->getFontMetrics()->getFont("Arial", "bold");
+        $dompdf->getCanvas()->page_text(267.64, 800, "{PAGE_NUM} / {PAGE_COUNT}", $font, 10);
+
+        return $pdf;
     }
 
     public function paid($id)
