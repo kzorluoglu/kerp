@@ -189,7 +189,7 @@ class InvoiceController extends Controller
             ->render();
 
         $dompdf = $pdf->getDomPDF();
-        $font = $dompdf->getFontMetrics()->getFont("Arial", "bold");
+        $font = $dompdf->getFontMetrics()->getFont("Arial");
         $dompdf->getCanvas()->page_text(267.64, 800, "{PAGE_NUM} / {PAGE_COUNT}", $font, 10);
 
         return $pdf;
