@@ -1,8 +1,6 @@
 # ERP
 Open Source Simple Invoice and Offer Tool with Customers and Companies.
 
-# Important Note: This is currently a development and learning project, not being used by any company.
-
 # Features
  - Multi Language Support
    - German
